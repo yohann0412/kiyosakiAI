@@ -1,0 +1,427 @@
+/* Completion Modal Styles */
+
+.completion-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(15px);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.completion-modal {
+  width: min(90vw, 500px);
+  max-height: 90vh;
+  padding: 3rem 2.5rem;
+  position: relative;
+  animation: modalEntrance 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  text-align: center;
+}
+
+/* Success Icon Animation */
+.success-icon-container {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.success-icon {
+  position: relative;
+}
+
+.success-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #f6d365 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+  box-shadow: 
+    0 0 30px rgba(102, 126, 234, 0.4),
+    0 0 60px rgba(246, 211, 101, 0.2);
+}
+
+.success-checkmark {
+  width: 40px;
+  height: 40px;
+}
+
+.checkmark-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.checkmark-circle {
+  stroke: white;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  fill: none;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: checkmarkCircle 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+}
+
+.checkmark-check {
+  stroke: white;
+  stroke-width: 3;
+  stroke-miterlimit: 10;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: checkmarkCheck 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.7s forwards;
+}
+
+/* Modal Content */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.modal-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.modal-subtitle {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Agent Status Section */
+.agent-status {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  margin: 1rem 0;
+  animation: pulse 2s infinite;
+}
+
+.agent-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-ring {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea, #f6d365);
+  padding: 3px;
+  animation: rotate 3s linear infinite;
+}
+
+.avatar-inner {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f6d365;
+}
+
+.agent-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.status-text {
+  text-align: left;
+  flex: 1;
+}
+
+.status-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 0.5rem 0;
+}
+
+.status-message {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  min-height: 1.4rem;
+}
+
+/* Progress Animation */
+.progress-animation {
+  margin: 1rem 0;
+}
+
+.progress-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea, #f6d365);
+  animation: dotPulse 1.5s infinite ease-in-out;
+}
+
+.dot-1 { animation-delay: 0s; }
+.dot-2 { animation-delay: 0.2s; }
+.dot-3 { animation-delay: 0.4s; }
+.dot-4 { animation-delay: 0.6s; }
+
+/* Time Estimate */
+.time-estimate {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.time-icon {
+  width: 16px;
+  height: 16px;
+  color: #f6d365;
+}
+
+.time-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Action Message */
+.action-message {
+  background: rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+}
+
+.action-message p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+.action-message strong {
+  color: #f6d365;
+  font-weight: 600;
+}
+
+/* Enhanced button for modal */
+.completion-modal .btn-primary {
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+  min-width: 200px;
+}
+
+/* Floating Particles */
+.floating-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(135deg, #667eea, #f6d365);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: floatUp 5s infinite linear;
+}
+
+/* Animations */
+@keyframes modalEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes checkmarkCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes checkmarkCheck {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dotPulse {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(-10vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .completion-modal {
+    width: 95vw;
+    padding: 2rem 1.5rem;
+  }
+
+  .modal-title {
+    font-size: 1.75rem;
+  }
+
+  .modal-subtitle {
+    font-size: 1rem;
+  }
+
+  .agent-status {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .status-text {
+    text-align: center;
+  }
+
+  .completion-modal .btn-primary {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 480px) {
+  .completion-modal {
+    padding: 1.5rem 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+
+  .success-circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .success-checkmark {
+    width: 30px;
+    height: 30px;
+  }
+
+  .agent-status {
+    padding: 1rem;
+  }
+
+  .avatar-ring {
+    width: 50px;
+    height: 50px;
+  }
+
+  .agent-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .completion-modal,
+  .success-circle,
+  .avatar-ring,
+  .dot,
+  .particle {
+    animation: none !important;
+  }
+  
+  .checkmark-circle,
+  .checkmark-check {
+    stroke-dashoffset: 0 !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .completion-modal {
+    border: 2px solid white;
+  }
+  
+  .agent-status {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+}

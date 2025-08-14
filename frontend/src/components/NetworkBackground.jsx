@@ -1,39 +1,32 @@
 import React, { useRef, useMemo, Suspense, useState, useCallback } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Points, PointMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 
 function InteractiveNetworkPoints({ mousePos }) {
   const mainRef = useRef()
   const pointsRef = useRef()
+  const linesGroupRef = useRef()
   const { viewport } = useThree()
   
-  // Generate layered network with depth
+  // Generate static network points that cover the whole screen
   const networkData = useMemo(() => {
-    const layers = 3
-    const pointsPerLayer = 100
-    const totalPoints = layers * pointsPerLayer
-    
-    const positions = new Float32Array(totalPoints * 3)
-    const originalPositions = new Float32Array(totalPoints * 3)
-    const sizes = new Float32Array(totalPoints)
-    const colors = new Float32Array(totalPoints * 3)
+    const count = 350
+    const positions = new Float32Array(count * 3)
+    const originalPositions = new Float32Array(count * 3)
+    const sizes = new Float32Array(count)
+    const colors = new Float32Array(count * 3)
     const connections = []
     
+    // Create points in a grid-like pattern with some randomness
+    const gridSize = Math.ceil(Math.sqrt(count))
     let pointIndex = 0
     
-    for (let layer = 0; layer < layers; layer++) {
-      const layerDepth = -layer * 8 - 5
-      const layerRadius = 25 + layer * 10
-      
-      for (let i = 0; i < pointsPerLayer; i++) {
-        const angle = (i / pointsPerLayer) * Math.PI * 2
-        const radiusVariation = 1 + Math.random() * 0.8
-        const radius = layerRadius * radiusVariation
-        
-        const x = Math.cos(angle) * radius + (Math.random() - 0.5) * 15
-        const y = Math.sin(angle) * radius + (Math.random() - 0.5) * 15
-        const z = layerDepth + (Math.random() - 0.5) * 6
+    for (let i = 0; i < gridSize && pointIndex < count; i++) {
+      for (let j = 0; j < gridSize && pointIndex < count; j++) {
+        // Spread points across a large area
+        const x = (i / (gridSize - 1)) * 90 - 45 + (Math.random() - 0.5) * 10
+        const y = (j / (gridSize - 1)) * 60 - 30 + (Math.random() - 0.5) * 10
+        const z = (Math.random() - 0.5) * 25
         
         positions[pointIndex * 3] = x
         positions[pointIndex * 3 + 1] = y
@@ -43,103 +36,94 @@ function InteractiveNetworkPoints({ mousePos }) {
         originalPositions[pointIndex * 3 + 1] = y
         originalPositions[pointIndex * 3 + 2] = z
         
-        // Size based on depth and randomness
-        const depthFactor = 1 - (layer / layers) * 0.5
-        sizes[pointIndex] = (0.05 + Math.random() * 0.08) * depthFactor
+        // Varied sizes based on depth
+        sizes[pointIndex] = 0.15 + Math.random() * 0.1 + (z + 12.5) * 0.004
         
-        // Color based on depth
-        const colorIntensity = depthFactor * (0.8 + Math.random() * 0.2)
-        colors[pointIndex * 3] = 0.4 + colorIntensity * 0.6     // R
-        colors[pointIndex * 3 + 1] = 0.5 + colorIntensity * 0.5 // G
-        colors[pointIndex * 3 + 2] = 0.9 + colorIntensity * 0.1 // B
+        // Color variation based on position
+        const colorIntensity = 0.7 + Math.random() * 0.3
+        colors[pointIndex * 3] = 0.3 + colorIntensity * 0.4     // R
+        colors[pointIndex * 3 + 1] = 0.4 + colorIntensity * 0.4 // G  
+        colors[pointIndex * 3 + 2] = 0.8 + colorIntensity * 0.2 // B
         
         pointIndex++
       }
     }
     
-    // Create connections with depth consideration
-    for (let i = 0; i < totalPoints; i++) {
-      for (let j = i + 1; j < totalPoints; j++) {
+    // Create connections between nearby points
+    for (let i = 0; i < count; i++) {
+      for (let j = i + 1; j < count; j++) {
         const dx = positions[i * 3] - positions[j * 3]
         const dy = positions[i * 3 + 1] - positions[j * 3 + 1]
         const dz = positions[i * 3 + 2] - positions[j * 3 + 2]
         const distance = Math.sqrt(dx * dx + dy * dy + dz * dz)
         
-        const maxDistance = Math.abs(dz) < 3 ? 8 : 5
-        
-        if (distance < maxDistance && Math.random() > 0.85) {
-          const opacity = Math.max(0.05, 0.2 - distance * 0.025)
+        // Only connect nearby points
+        if (distance < 15 && Math.random() > 0.75) {
+          const baseOpacity = Math.max(0.05, 0.3 - distance * 0.015)
           connections.push({
             start: [positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]],
             end: [positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]],
-            opacity,
-            distance
+            opacity: baseOpacity,
+            originalOpacity: baseOpacity,
+            distance: distance
           })
         }
       }
     }
     
-    return { positions, originalPositions, sizes, colors, connections, totalPoints }
+    return { positions, originalPositions, sizes, colors, connections, count }
   }, [])
 
   useFrame((state) => {
     if (mainRef.current) {
-      // Subtle base rotation
-      mainRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.08) * 0.05
+      // Gentle rotation
+      mainRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.08
       mainRef.current.rotation.y = state.clock.elapsedTime * 0.03
     }
     
+    // Mouse interaction effects
     if (pointsRef.current && mousePos) {
       const positions = pointsRef.current.geometry.attributes.position.array
       const sizes = pointsRef.current.geometry.attributes.size.array
       const colors = pointsRef.current.geometry.attributes.color.array
       
-      // Convert mouse position to world coordinates
+      // Convert mouse to world coordinates
       const mouseX = (mousePos.x / window.innerWidth) * 2 - 1
       const mouseY = -(mousePos.y / window.innerHeight) * 2 + 1
-      const mouseWorldX = mouseX * viewport.width / 2
-      const mouseWorldY = mouseY * viewport.height / 2
+      const mouseWorldX = mouseX * viewport.width / 2 * 1.5
+      const mouseWorldY = mouseY * viewport.height / 2 * 1.5
       
-      for (let i = 0; i < networkData.totalPoints; i++) {
+      for (let i = 0; i < networkData.count; i++) {
         const originalX = networkData.originalPositions[i * 3]
         const originalY = networkData.originalPositions[i * 3 + 1]
         const originalZ = networkData.originalPositions[i * 3 + 2]
         
-        // Calculate distance from mouse to point (in 2D screen space)
+        // Calculate distance from mouse
         const dx = originalX - mouseWorldX
         const dy = originalY - mouseWorldY
         const distance = Math.sqrt(dx * dx + dy * dy)
         
-        // Ripple effect parameters
-        const rippleRadius = 8
-        const rippleStrength = 3
-        const timeOffset = state.clock.elapsedTime * 4
+        const interactionRadius = 12
         
-        if (distance < rippleRadius) {
-          // Create ripple wave
-          const normalizedDistance = distance / rippleRadius
-          const wave = Math.sin(normalizedDistance * Math.PI * 3 - timeOffset) * 
-                      (1 - normalizedDistance) * rippleStrength
+        if (distance < interactionRadius) {
+          // Create ripple effect
+          const influence = (interactionRadius - distance) / interactionRadius
+          const wave = Math.sin(state.clock.elapsedTime * 8 - distance * 0.5) * influence
           
           // Apply wave displacement
-          const direction = distance > 0 ? 1 : 0
-          const waveX = direction * (dx / distance) * wave * 0.5
-          const waveY = direction * (dy / distance) * wave * 0.5
-          const waveZ = wave * 0.3
+          positions[i * 3] = originalX + dx * wave * 0.3
+          positions[i * 3 + 1] = originalY + dy * wave * 0.3
+          positions[i * 3 + 2] = originalZ + wave * 2
           
-          positions[i * 3] = originalX + waveX
-          positions[i * 3 + 1] = originalY + waveY
-          positions[i * 3 + 2] = originalZ + waveZ
+          // Enhance size
+          sizes[i] = networkData.sizes[i] * (1 + influence * 2)
           
-          // Enhance size and brightness
-          const enhancement = (1 - normalizedDistance) * 2
-          sizes[i] = networkData.sizes[i] * (1 + enhancement)
-          
-          colors[i * 3] = Math.min(1, networkData.colors[i * 3] + enhancement * 0.3)
-          colors[i * 3 + 1] = Math.min(1, networkData.colors[i * 3 + 1] + enhancement * 0.2)
-          colors[i * 3 + 2] = Math.min(1, networkData.colors[i * 3 + 2] + enhancement * 0.1)
+          // Brighten colors
+          colors[i * 3] = Math.min(1, networkData.colors[i * 3] + influence * 0.5)
+          colors[i * 3 + 1] = Math.min(1, networkData.colors[i * 3 + 1] + influence * 0.3)
+          colors[i * 3 + 2] = Math.min(1, networkData.colors[i * 3 + 2] + influence * 0.2)
         } else {
-          // Return to original position
+          // Return to original state
           positions[i * 3] = originalX
           positions[i * 3 + 1] = originalY
           positions[i * 3 + 2] = originalZ
@@ -154,39 +138,88 @@ function InteractiveNetworkPoints({ mousePos }) {
       pointsRef.current.geometry.attributes.size.needsUpdate = true
       pointsRef.current.geometry.attributes.color.needsUpdate = true
     }
+    
+    // Animate connection lines
+    if (linesGroupRef.current && mousePos) {
+      const mouseX = (mousePos.x / window.innerWidth) * 2 - 1
+      const mouseY = -(mousePos.y / window.innerHeight) * 2 + 1
+      const mouseWorldX = mouseX * viewport.width / 2 * 1.5
+      const mouseWorldY = mouseY * viewport.height / 2 * 1.5
+      
+      linesGroupRef.current.children.forEach((line, index) => {
+        const connection = networkData.connections[index]
+        if (connection && line.material) {
+          // Calculate distance from mouse to line midpoint
+          const midX = (connection.start[0] + connection.end[0]) / 2
+          const midY = (connection.start[1] + connection.end[1]) / 2
+          const distanceToMouse = Math.sqrt(
+            Math.pow(midX - mouseWorldX, 2) + Math.pow(midY - mouseWorldY, 2)
+          )
+          
+          if (distanceToMouse < 15) {
+            const influence = (15 - distanceToMouse) / 15
+            line.material.opacity = connection.originalOpacity * (1 + influence * 3)
+          } else {
+            line.material.opacity = connection.originalOpacity
+          }
+        }
+      })
+    }
   })
 
   return (
     <group ref={mainRef}>
-      <Points ref={pointsRef} positions={networkData.positions}>
-        <PointMaterial
-          transparent
-          vertexColors
-          size={0.08}
-          sizeAttenuation={true}
-          depthWrite={false}
-          opacity={0.8}
-        />
-      </Points>
-      
-      {/* Enhanced connection lines with varying opacity */}
-      {networkData.connections.map((connection, index) => (
-        <line key={index}>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              count={2}
-              array={new Float32Array([...connection.start, ...connection.end])}
-              itemSize={3}
-            />
-          </bufferGeometry>
-          <lineBasicMaterial
-            color={connection.distance < 6 ? "#f6d365" : "#667eea"}
-            transparent
-            opacity={connection.opacity}
+      {/* Interactive points */}
+      <points ref={pointsRef}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            count={networkData.count}
+            array={networkData.positions}
+            itemSize={3}
           />
-        </line>
-      ))}
+          <bufferAttribute
+            attach="attributes-size"
+            count={networkData.count}
+            array={networkData.sizes}
+            itemSize={1}
+          />
+          <bufferAttribute
+            attach="attributes-color"
+            count={networkData.count}
+            array={networkData.colors}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.15}
+          transparent
+          opacity={0.8}
+          sizeAttenuation={true}
+          vertexColors={true}
+        />
+      </points>
+      
+      {/* Connection lines */}
+      <group ref={linesGroupRef}>
+        {networkData.connections.map((connection, index) => (
+          <line key={index}>
+            <bufferGeometry>
+              <bufferAttribute
+                attach="attributes-position"
+                count={2}
+                array={new Float32Array([...connection.start, ...connection.end])}
+                itemSize={3}
+              />
+            </bufferGeometry>
+            <lineBasicMaterial
+              color={connection.distance < 8 ? "#f6d365" : "#667eea"}
+              transparent
+              opacity={connection.opacity}
+            />
+          </line>
+        ))}
+      </group>
     </group>
   )
 }
@@ -195,79 +228,135 @@ function FloatingParticles({ mousePos }) {
   const particlesRef = useRef()
   const { viewport } = useThree()
   
+  // Enhanced floating particles
   const particleData = useMemo(() => {
-    const count = 80
+    const count = 100
     const positions = new Float32Array(count * 3)
-    const velocities = new Float32Array(count * 3)
+    const originalPositions = new Float32Array(count * 3)
     const sizes = new Float32Array(count)
+    const colors = new Float32Array(count * 3)
     
     for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 40
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 40
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 20
+      const x = (Math.random() - 0.5) * 120
+      const y = (Math.random() - 0.5) * 80
+      const z = (Math.random() - 0.5) * 40
       
-      velocities[i * 3] = (Math.random() - 0.5) * 0.015
-      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.015
-      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.008
+      positions[i * 3] = x
+      positions[i * 3 + 1] = y
+      positions[i * 3 + 2] = z
       
-      sizes[i] = 0.008 + Math.random() * 0.02
+      originalPositions[i * 3] = x
+      originalPositions[i * 3 + 1] = y
+      originalPositions[i * 3 + 2] = z
+      
+      sizes[i] = 0.05 + Math.random() * 0.08
+      
+      // Golden color variations
+      const intensity = 0.8 + Math.random() * 0.2
+      colors[i * 3] = 0.9 + intensity * 0.1     // R
+      colors[i * 3 + 1] = 0.7 + intensity * 0.3 // G
+      colors[i * 3 + 2] = 0.2 + intensity * 0.3 // B
     }
     
-    return { positions, velocities, sizes, count }
+    return { positions, originalPositions, sizes, colors, count }
   }, [])
 
   useFrame((state) => {
     if (particlesRef.current) {
       const positions = particlesRef.current.geometry.attributes.position.array
       const sizes = particlesRef.current.geometry.attributes.size.array
+      const colors = particlesRef.current.geometry.attributes.color.array
+      
+      // Mouse interaction
+      const mouseX = mousePos ? (mousePos.x / window.innerWidth) * 2 - 1 : 0
+      const mouseY = mousePos ? -(mousePos.y / window.innerHeight) * 2 + 1 : 0
+      const mouseWorldX = mouseX * viewport.width / 2 * 1.5
+      const mouseWorldY = mouseY * viewport.height / 2 * 1.5
       
       for (let i = 0; i < particleData.count; i++) {
-        // Basic movement
-        positions[i * 3] += particleData.velocities[i * 3]
-        positions[i * 3 + 1] += particleData.velocities[i * 3 + 1]
-        positions[i * 3 + 2] += particleData.velocities[i * 3 + 2]
+        const originalX = particleData.originalPositions[i * 3]
+        const originalY = particleData.originalPositions[i * 3 + 1]
+        const originalZ = particleData.originalPositions[i * 3 + 2]
         
-        // Boundary wrapping
-        if (Math.abs(positions[i * 3]) > 20) positions[i * 3] *= -1
-        if (Math.abs(positions[i * 3 + 1]) > 20) positions[i * 3 + 1] *= -1
-        if (Math.abs(positions[i * 3 + 2]) > 10) positions[i * 3 + 2] *= -1
+        // Floating motion
+        const floatX = Math.sin(state.clock.elapsedTime * 0.5 + i * 0.1) * 0.02
+        const floatY = Math.cos(state.clock.elapsedTime * 0.3 + i * 0.1) * 0.02
+        const floatZ = Math.sin(state.clock.elapsedTime * 0.7 + i * 0.1) * 0.01
         
-        // Mouse influence
+        let x = originalX + floatX
+        let y = originalY + floatY
+        let z = originalZ + floatZ
+        let size = particleData.sizes[i]
+        let colorR = particleData.colors[i * 3]
+        let colorG = particleData.colors[i * 3 + 1]
+        let colorB = particleData.colors[i * 3 + 2]
+        
+        // Mouse attraction
         if (mousePos) {
-          const mouseX = (mousePos.x / window.innerWidth) * 2 - 1
-          const mouseY = -(mousePos.y / window.innerHeight) * 2 + 1
-          const mouseWorldX = mouseX * viewport.width / 2
-          const mouseWorldY = mouseY * viewport.height / 2
-          
-          const dx = positions[i * 3] - mouseWorldX
-          const dy = positions[i * 3 + 1] - mouseWorldY
+          const dx = x - mouseWorldX
+          const dy = y - mouseWorldY
           const distance = Math.sqrt(dx * dx + dy * dy)
           
-          if (distance < 12) {
-            const force = (12 - distance) / 12
-            sizes[i] = particleData.sizes[i] * (1 + force * 3)
-          } else {
-            sizes[i] = particleData.sizes[i]
+          if (distance < 20) {
+            const attraction = (20 - distance) / 20
+            const pullStrength = attraction * 0.5
+            
+            x -= dx * pullStrength * 0.1
+            y -= dy * pullStrength * 0.1
+            z += attraction * 3
+            
+            size *= (1 + attraction * 2)
+            colorR = Math.min(1, colorR + attraction * 0.2)
+            colorG = Math.min(1, colorG + attraction * 0.1)
+            colorB = Math.min(1, colorB + attraction * 0.3)
           }
         }
+        
+        positions[i * 3] = x
+        positions[i * 3 + 1] = y
+        positions[i * 3 + 2] = z
+        sizes[i] = size
+        colors[i * 3] = colorR
+        colors[i * 3 + 1] = colorG
+        colors[i * 3 + 2] = colorB
       }
       
       particlesRef.current.geometry.attributes.position.needsUpdate = true
       particlesRef.current.geometry.attributes.size.needsUpdate = true
+      particlesRef.current.geometry.attributes.color.needsUpdate = true
     }
   })
 
   return (
-    <Points ref={particlesRef} positions={particleData.positions}>
-      <PointMaterial
+    <points ref={particlesRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={particleData.count}
+          array={particleData.positions}
+          itemSize={3}
+        />
+        <bufferAttribute
+          attach="attributes-size"
+          count={particleData.count}
+          array={particleData.sizes}
+          itemSize={1}
+        />
+        <bufferAttribute
+          attach="attributes-color"
+          count={particleData.count}
+          array={particleData.colors}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.08}
         transparent
-        color="#f6d365"
-        size={0.015}
+        opacity={0.7}
         sizeAttenuation={true}
-        depthWrite={false}
-        opacity={0.6}
+        vertexColors={true}
       />
-    </Points>
+    </points>
   )
 }
 
@@ -293,23 +382,24 @@ function NetworkBackground() {
         height: '100%',
         zIndex: 1,
         background: `
-          radial-gradient(ellipse at 20% 50%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 20%, rgba(246, 211, 101, 0.06) 0%, transparent 50%),
-          radial-gradient(ellipse at 40% 80%, rgba(118, 75, 162, 0.06) 0%, transparent 50%),
+          radial-gradient(ellipse at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(246, 211, 101, 0.08) 0%, transparent 50%),
+          radial-gradient(ellipse at 40% 80%, rgba(118, 75, 162, 0.08) 0%, transparent 50%),
           linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%)
         `
       }}
     >
       <Canvas
-        camera={{ position: [0, 0, 12], fov: 50 }}
+        camera={{ position: [0, 0, 35], fov: 75 }}
         style={{ background: 'transparent' }}
-        dpr={Math.min(window.devicePixelRatio, 2)}
-        performance={{ min: 0.5 }}
+        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 2]}
       >
         <Suspense fallback={null}>
-          <ambientLight intensity={0.4} />
-          <pointLight position={[10, 10, 10]} intensity={0.6} color="#667eea" />
-          <pointLight position={[-10, -10, -5]} intensity={0.4} color="#f6d365" />
+          <ambientLight intensity={0.3} />
+          <pointLight position={[20, 20, 15]} intensity={0.8} color="#667eea" />
+          <pointLight position={[-20, -20, -10]} intensity={0.6} color="#f6d365" />
+          <pointLight position={[0, 0, 20]} intensity={0.4} color="#764ba2" />
           
           <InteractiveNetworkPoints mousePos={mousePos} />
           <FloatingParticles mousePos={mousePos} />

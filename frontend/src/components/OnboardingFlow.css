@@ -155,6 +155,13 @@
   padding: 0.5rem;
 }
 
+.onboarding-container .textarea-field {
+  min-height: 140px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
 /* Navigation Buttons */
 .navigation-buttons {
   display: flex;

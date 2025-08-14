@@ -1,0 +1,100 @@
+.
+├── .env.example
+├── Makefile
+├── README.md
+├── backend
+│   ├── __init__.py
+│   ├── agent
+│   │   ├── __init__.py
+│   │   ├── central_agent.py
+│   │   ├── engines
+│   │   │   ├── __init__.py
+│   │   │   ├── data_processor.py
+│   │   │   ├── market_intelligence.py
+│   │   │   ├── ml_predictor.py
+│   │   │   ├── report_generator.py
+│   │   │   └── scoring_models.py
+│   │   ├── orchestrator.py
+│   │   ├── schemas.py
+│   │   └── tools
+│   │       ├── __init__.py
+│   │       ├── amenities.py
+│   │       ├── climate.py
+│   │       ├── comps.py
+│   │       ├── crime.py
+│   │       ├── geocode.py
+│   │       ├── infra_context.py
+│   │       ├── llm_reasoner.py
+│   │       ├── permits.py
+│   │       ├── schools.py
+│   │       └── zoning.py
+│   ├── app.py
+│   ├── cache
+│   │   └── README.md
+│   ├── config.py
+│   ├── data
+│   │   ├── .gitkeep
+│   │   ├── cb_minutes.md
+│   │   ├── facilities_filtered_2025-08-13.geojson
+│   │   ├── flood_flags.csv
+│   │   ├── infra_dossier.md
+│   │   ├── permits.csv
+│   │   ├── pluto.csv
+│   │   └── sales.csv
+│   ├── facilityProcessor.py
+│   ├── jobs
+│   │   ├── __init__.py
+│   │   ├── queue.py
+│   │   ├── synchronizer.py
+│   │   └── workers.py
+│   ├── prompts
+│   │   ├── memo_system.txt
+│   │   └── memo_user_template.txt
+│   ├── requirements.txt
+│   ├── router_analysis.py
+│   ├── scripts
+│   │   ├── __init__.py
+│   │   ├── facilityProcessor.py
+│   │   ├── prep_permits.py
+│   │   ├── prep_pluto.py
+│   │   ├── prep_sales.py
+│   │   └── prep_subway.py
+│   └── tests
+│       ├── __init__.py
+│       ├── test_agent_smoke.py
+│       └── test_tools_unit.py
+├── env.example
+├── filelist.txt
+├── frontend
+│   ├── .gitignore
+│   ├── README.md
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── plan.md
+│   ├── public
+│   │   └── vite.svg
+│   ├── src
+│   │   ├── App.css
+│   │   ├── App.jsx
+│   │   ├── assets
+│   │   │   └── react.svg
+│   │   ├── components
+│   │   │   ├── CompletionModal.css
+│   │   │   ├── CompletionModal.jsx
+│   │   │   ├── Header.jsx
+│   │   │   ├── LandingPage.jsx
+│   │   │   ├── NetworkBackground.jsx
+│   │   │   ├── OnboardingFlow.css
+│   │   │   ├── OnboardingFlow.jsx
+│   │   │   ├── PropertyResearch.jsx
+│   │   │   ├── Recommendations.jsx
+│   │   │   └── SearchForm.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+│   └── vite.config.js
+├── test_agent.py
+└── tree.txt
+
+16 directories, 82 files

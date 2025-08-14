@@ -6,7 +6,7 @@ function LandingPage({ onStartOnboarding }) {
       <div className="landing-content glass">
         <div className="landing-header">
           <h2 className="landing-title gradient-text">
-            The FINAL Intelligence Platform for Your Investing
+            The FINAL Intelligence Layer for Real Estate Investing
           </h2>
           <p className="landing-subtitle">
             We pull data from every source you don't think to - zoning and planning data, weather patterns, school districts, social media sentiment, satellite imagery, and more. Our AI agents synthesize it all to find investment opportunities others miss.

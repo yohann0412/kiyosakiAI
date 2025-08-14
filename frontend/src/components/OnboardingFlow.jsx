@@ -10,6 +10,7 @@ const OnboardingFlow = ({ onComplete }) => {
     phone: '',
     investmentGoals: '',
     budget: '',
+    investmentThesis: '',
     timeline: '',
     experience: '',
     riskTolerance: ''
@@ -61,6 +62,19 @@ const OnboardingFlow = ({ onComplete }) => {
       ]
     },
     {
+      title: "Investment Thesis",
+      subtitle: "Tell us about your investment strategy",
+      fields: [
+        { 
+          name: 'investmentThesis', 
+          label: 'What\'s your investment thesis?', 
+          type: 'textarea', 
+          placeholder: 'Describe what types of properties you like investing in, your investment strategy, criteria you look for, markets you prefer, etc.\n\nFor example: "I focus on multi-family properties in emerging neighborhoods with good transit access. I prefer cash-flowing properties under $500k that I can add value to through light renovations..."',
+          required: true
+        }
+      ]
+    },
+    {
       title: "Investment Preferences",
       subtitle: "Tell us about your investment style",
       fields: [
@@ -97,6 +111,7 @@ const OnboardingFlow = ({ onComplete }) => {
       title: "Market Preferences",
       subtitle: "Where would you like to invest?",
       fields: [
+       
         { 
           name: 'riskTolerance', 
           label: 'Risk Tolerance', 
@@ -193,6 +208,15 @@ const OnboardingFlow = ({ onComplete }) => {
                       </option>
                     ))}
                   </select>
+                ) : field.type === 'textarea' ? (
+                  <textarea
+                    className="input-field textarea-field"
+                    placeholder={field.placeholder}
+                    value={formData[field.name]}
+                    onChange={(e) => handleInputChange(field.name, e.target.value)}
+                    required={field.required}
+                    rows={6}
+                  />
                 ) : (
                   <input
                     type={field.type}

@@ -1,10 +1,7 @@
 import orjson
-from shapely.geometry import Point, shape
-from shapely.ops import transform
-import pyproj
-from functools import partial
-from collections import Counter
 import os
+import math
+from collections import Counter
 
 def nearby_amenities(lat: float, lon: float, radius_m: int) -> dict:
     """Returns counts_by_facgroup, counts_by_facdomain, top_named, insight_bullets."""
@@ -21,20 +18,26 @@ def nearby_amenities(lat: float, lon: float, radius_m: int) -> dict:
     with open(filepath, "rb") as f:
         geojson_data = orjson.loads(f.read())
 
-    project = partial(
-        pyproj.transform,
-        pyproj.Proj(proj='latlong', datum='WGS84'),
-        pyproj.Proj(proj='aeqd', lat_0=lat, lon_0=lon)
-    )
-    
-    center = Point(lon, lat)
-    buffer_proj = transform(project, center).buffer(radius_m)
+    # Simple distance calculation using haversine formula
+    def distance_km(lat1, lon1, lat2, lon2):
+        R = 6371  # Earth's radius in km
+        dlat = math.radians(lat2 - lat1)
+        dlon = math.radians(lon2 - lon1)
+        a = (math.sin(dlat/2) * math.sin(dlat/2) + 
+             math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * 
+             math.sin(dlon/2) * math.sin(dlon/2))
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+        return R * c * 1000  # Convert to meters
 
     nearby_facilities = []
     for feature in geojson_data["features"]:
-        facility_shape = shape(feature["geometry"])
-        if buffer_proj.intersects(transform(project, facility_shape)):
-            nearby_facilities.append(feature["properties"])
+        if feature["geometry"]["type"] == "Point":
+            coords = feature["geometry"]["coordinates"]
+            facility_lon, facility_lat = coords[0], coords[1]
+            
+            dist = distance_km(lat, lon, facility_lat, facility_lon)
+            if dist <= radius_m:
+                nearby_facilities.append(feature["properties"])
 
     counts_by_facgroup = Counter(f['facgroup'] for f in nearby_facilities)
     counts_by_facdomain = Counter(f['facdomain'] for f in nearby_facilities)

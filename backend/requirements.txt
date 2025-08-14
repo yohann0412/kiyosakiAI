@@ -9,3 +9,9 @@ orjson
 tenacity
 python-dotenv
 rq
+redis
+pyproj
+haversine
+pyogrio
+pytest
+pyarrow

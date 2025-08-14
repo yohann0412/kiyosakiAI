@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.9712, 40.7831]}, "properties": {"facname": "Sample Park", "factype": "Park", "facgroup": "PARKS AND PLAZAS", "facdomain": "Parks and Recreation", "address": "123 Main St", "boro": "Manhattan", "datasource": "NYC Parks"}}]}

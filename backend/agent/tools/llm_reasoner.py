@@ -1,7 +1,7 @@
 import httpx
 import os
 from tenacity import retry, stop_after_attempt, wait_exponential
-from ...agent.schemas import ReasoningInput, ReasoningOutput
+from ..schemas import ReasoningInput, ReasoningOutput
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
 def generate_memo(reasoning_input: ReasoningInput) -> ReasoningOutput:

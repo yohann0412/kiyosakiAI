@@ -3,7 +3,7 @@ from shapely.geometry import Point
 from haversine import haversine
 
 # 1) Load your GeoJSON
-gdf = read_dataframe("/path/to/facilities_filtered_2025-08-13.geojson")  # returns a pandas DF with a 'geometry' column (Shapely)
+gdf = read_dataframe("/facilities_filtered_2025-08-13.geojson")  # returns a pandas DF with a 'geometry' column (Shapely)
 
 # 2) Given a subject property (lat, lon)
 prop_lat, prop_lon = 40.7808, -73.9556  # example UES

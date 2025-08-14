@@ -1,13 +1,26 @@
-.PHONY: dev test data
+.PHONY: dev test data setup
 
-dev:
+setup:
 	pip install -r backend/requirements.txt
-	uvicorn backend.app:app --host 0.0.0.0 --port ${PORT} --reload
 
-test:
-	# Add test command here
-	echo "No tests configured yet"
+dev: setup
+	uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
+
+test: setup
+	python -m pytest backend/tests/ -v
+
+test-unit:
+	python -m pytest backend/tests/test_tools_unit.py -v
+
+test-smoke:
+	python -m pytest backend/tests/test_agent_smoke.py -v
 
 data:
-	# Add data prep scripts here
-	echo "No data prep scripts configured yet"
+	python backend/scripts/prep_permits.py
+	python backend/scripts/prep_pluto.py
+	python backend/scripts/prep_sales.py
+	python backend/scripts/prep_subway.py
+
+clean:
+	find . -type d -name "__pycache__" -exec rm -rf {} +
+	find . -type f -name "*.pyc" -delete

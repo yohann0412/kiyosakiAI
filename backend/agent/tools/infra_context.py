@@ -15,8 +15,6 @@ def long_context_for_area(keywords: list[str]) -> str:
         relevant_snippets = []
         for keyword in keywords:
             if keyword.lower() in content.lower():
-                # This is a simple implementation that returns the whole file if a keyword is found.
-                # A more advanced implementation could return specific paragraphs or sentences.
                 relevant_snippets.append(content)
                 break 
         

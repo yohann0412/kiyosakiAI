@@ -10,8 +10,8 @@ function InteractiveNetworkPoints({ mousePos }) {
   
   // Generate layered network with depth
   const networkData = useMemo(() => {
-    const layers = 4
-    const pointsPerLayer = 150
+    const layers = 3
+    const pointsPerLayer = 100
     const totalPoints = layers * pointsPerLayer
     
     const positions = new Float32Array(totalPoints * 3)
@@ -44,11 +44,11 @@ function InteractiveNetworkPoints({ mousePos }) {
         originalPositions[pointIndex * 3 + 2] = z
         
         // Size based on depth and randomness
-        const depthFactor = 1 - (layer / layers) * 0.7
-        sizes[pointIndex] = (0.1 + Math.random() * 0.15) * depthFactor
+        const depthFactor = 1 - (layer / layers) * 0.5
+        sizes[pointIndex] = (0.05 + Math.random() * 0.08) * depthFactor
         
         // Color based on depth
-        const colorIntensity = depthFactor * (0.7 + Math.random() * 0.3)
+        const colorIntensity = depthFactor * (0.8 + Math.random() * 0.2)
         colors[pointIndex * 3] = 0.4 + colorIntensity * 0.6     // R
         colors[pointIndex * 3 + 1] = 0.5 + colorIntensity * 0.5 // G
         colors[pointIndex * 3 + 2] = 0.9 + colorIntensity * 0.1 // B
@@ -67,8 +67,8 @@ function InteractiveNetworkPoints({ mousePos }) {
         
         const maxDistance = Math.abs(dz) < 3 ? 8 : 5
         
-        if (distance < maxDistance && Math.random() > 0.8) {
-          const opacity = Math.max(0.02, 0.15 - distance * 0.02)
+        if (distance < maxDistance && Math.random() > 0.85) {
+          const opacity = Math.max(0.05, 0.2 - distance * 0.025)
           connections.push({
             start: [positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]],
             end: [positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]],
@@ -162,11 +162,10 @@ function InteractiveNetworkPoints({ mousePos }) {
         <PointMaterial
           transparent
           vertexColors
-          size={0.1}
+          size={0.08}
           sizeAttenuation={true}
           depthWrite={false}
-          opacity={0.9}
-          blending={THREE.AdditiveBlending}
+          opacity={0.8}
         />
       </Points>
       
@@ -185,7 +184,6 @@ function InteractiveNetworkPoints({ mousePos }) {
             color={connection.distance < 6 ? "#f6d365" : "#667eea"}
             transparent
             opacity={connection.opacity}
-            blending={THREE.AdditiveBlending}
           />
         </line>
       ))}
@@ -198,21 +196,21 @@ function FloatingParticles({ mousePos }) {
   const { viewport } = useThree()
   
   const particleData = useMemo(() => {
-    const count = 120
+    const count = 80
     const positions = new Float32Array(count * 3)
     const velocities = new Float32Array(count * 3)
     const sizes = new Float32Array(count)
     
     for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 60
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 60
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 30
+      positions[i * 3] = (Math.random() - 0.5) * 40
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 40
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 20
       
-      velocities[i * 3] = (Math.random() - 0.5) * 0.02
-      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.02
-      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.01
+      velocities[i * 3] = (Math.random() - 0.5) * 0.015
+      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.015
+      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.008
       
-      sizes[i] = 0.01 + Math.random() * 0.03
+      sizes[i] = 0.008 + Math.random() * 0.02
     }
     
     return { positions, velocities, sizes, count }
@@ -230,9 +228,9 @@ function FloatingParticles({ mousePos }) {
         positions[i * 3 + 2] += particleData.velocities[i * 3 + 2]
         
         // Boundary wrapping
-        if (Math.abs(positions[i * 3]) > 30) positions[i * 3] *= -1
-        if (Math.abs(positions[i * 3 + 1]) > 30) positions[i * 3 + 1] *= -1
-        if (Math.abs(positions[i * 3 + 2]) > 15) positions[i * 3 + 2] *= -1
+        if (Math.abs(positions[i * 3]) > 20) positions[i * 3] *= -1
+        if (Math.abs(positions[i * 3 + 1]) > 20) positions[i * 3 + 1] *= -1
+        if (Math.abs(positions[i * 3 + 2]) > 10) positions[i * 3 + 2] *= -1
         
         // Mouse influence
         if (mousePos) {
@@ -264,11 +262,10 @@ function FloatingParticles({ mousePos }) {
       <PointMaterial
         transparent
         color="#f6d365"
-        size={0.02}
+        size={0.015}
         sizeAttenuation={true}
         depthWrite={false}
-        opacity={0.8}
-        blending={THREE.AdditiveBlending}
+        opacity={0.6}
       />
     </Points>
   )
@@ -296,56 +293,23 @@ function NetworkBackground() {
         height: '100%',
         zIndex: 1,
         background: `
-          radial-gradient(ellipse at 25% 60%, rgba(102, 126, 234, 0.25) 0%, transparent 60%),
-          radial-gradient(ellipse at 75% 30%, rgba(246, 211, 101, 0.2) 0%, transparent 65%),
-          radial-gradient(ellipse at 40% 90%, rgba(118, 75, 162, 0.2) 0%, transparent 55%),
-          radial-gradient(ellipse at 80% 80%, rgba(246, 211, 101, 0.15) 0%, transparent 50%),
-          linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 40%, #16213e 60%, #0a0a0a 100%)
-        `,
-        cursor: 'none'
+          radial-gradient(ellipse at 20% 50%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(246, 211, 101, 0.06) 0%, transparent 50%),
+          radial-gradient(ellipse at 40% 80%, rgba(118, 75, 162, 0.06) 0%, transparent 50%),
+          linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%)
+        `
       }}
     >
-      {/* Mouse cursor effect */}
-      <div
-        style={{
-          position: 'absolute',
-          left: mousePos.x - 20,
-          top: mousePos.y - 20,
-          width: 40,
-          height: 40,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(246, 211, 101, 0.4) 0%, rgba(102, 126, 234, 0.2) 50%, transparent 100%)',
-          pointerEvents: 'none',
-          zIndex: 10,
-          filter: 'blur(8px)',
-          transition: 'transform 0.1s ease-out',
-          transform: 'scale(1.2)'
-        }}
-      />
-      
       <Canvas
-        camera={{ position: [0, 0, 15], fov: 45 }}
+        camera={{ position: [0, 0, 12], fov: 50 }}
         style={{ background: 'transparent' }}
         dpr={Math.min(window.devicePixelRatio, 2)}
         performance={{ min: 0.5 }}
-        gl={{ 
-          antialias: true,
-          alpha: true,
-          powerPreference: "high-performance"
-        }}
       >
         <Suspense fallback={null}>
-          {/* Enhanced lighting */}
-          <ambientLight intensity={0.2} />
-          <pointLight position={[15, 15, 10]} intensity={0.8} color="#667eea" />
-          <pointLight position={[-15, -10, -5]} intensity={0.6} color="#f6d365" />
-          <pointLight position={[0, -15, 5]} intensity={0.4} color="#764ba2" />
-          <directionalLight 
-            position={[10, 10, 20]} 
-            intensity={0.3} 
-            color="#ffffff"
-            castShadow={false}
-          />
+          <ambientLight intensity={0.4} />
+          <pointLight position={[10, 10, 10]} intensity={0.6} color="#667eea" />
+          <pointLight position={[-10, -10, -5]} intensity={0.4} color="#f6d365" />
           
           <InteractiveNetworkPoints mousePos={mousePos} />
           <FloatingParticles mousePos={mousePos} />

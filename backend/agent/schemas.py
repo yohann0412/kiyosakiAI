@@ -12,3 +12,7 @@ class ReasoningInput(BaseModel):
     risk_bullets: List[str]
     long_context: Optional[str]
 
+class ReasoningOutput(BaseModel):
+    memo_markdown: str
+    verdict: str
+

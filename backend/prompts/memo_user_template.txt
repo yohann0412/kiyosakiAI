@@ -1,0 +1,23 @@
+## Investment Memo
+
+**Property Address:** {address}
+**Coordinates:** {lat}, {lon}
+**Analysis Radius:** {radius_m} meters
+
+### Key Metrics
+{metrics}
+
+### Amenity Analysis
+{amenities_bullets}
+
+### Infrastructure & Community Context
+{infra_bullets}
+
+### Risk Analysis
+{risk_bullets}
+
+### Long-Form Context
+
+<context>
+{long_context}
+</context>

@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+httpx
+duckdb
+pandas
+shapely
+orjson
+tenacity
+python-dotenv
+rq

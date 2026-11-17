@@ -55,7 +55,7 @@ export async function checkAllowance(session: Session): Promise<Denial | null> {
   const ip = (await getJson<Counter>(ipKey(session))) ?? { count: 0, recent: [] };
 
   const lastMinute = (ip.recent ?? []).filter((t) => now - t < 60_000);
-  if (lastMinute.length >= tuning.burstPerMinute) {
+  if (lastMinute.length >= (session.email ? tuning.burstPerMinuteEmail : tuning.burstPerMinute)) {
     return { reason: "slow_down", message: "That's a lot of uploads in one minute. Give it a moment and try again." };
   }
 

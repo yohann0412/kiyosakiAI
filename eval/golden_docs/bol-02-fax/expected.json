@@ -1,0 +1,128 @@
+{
+ "id": "bol-02-fax",
+ "docType": "bill_of_lading",
+ "capture": "fax",
+ "difficulty": "hard",
+ "about": "The same form after a fax machine: pure black and white, low resolution, specks and skew. Collect terms, no customer order table.",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "bol_number": "08810440001177203",
+  "ship_date": "2026-11-02",
+  "shipper_name": "Kettle Ridge Cabinet Works",
+  "shipper_address": "600 Sawmill Road, Hickory, NC 28601",
+  "consignee_name": "Bellwether Kitchens & Bath",
+  "consignee_address": "2315 Showroom Drive, Richmond, VA 23230",
+  "carrier_name": "Piedmont Overland Express",
+  "scac": "PDOE",
+  "pro_number": "330-771-9042",
+  "trailer_number": "48217",
+  "seal_number": "3390182",
+  "freight_terms": "Collect",
+  "special_instructions": "Inside delivery. Fragile, do not top load.",
+  "total_handling_units": "8",
+  "total_packages": "82",
+  "total_weight": "4486 lb"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "handling_unit_qty",
+     "label": "QTY"
+    },
+    {
+     "key": "handling_unit_type",
+     "label": "TYPE"
+    },
+    {
+     "key": "package_qty",
+     "label": "QTY"
+    },
+    {
+     "key": "package_type",
+     "label": "TYPE"
+    },
+    {
+     "key": "weight",
+     "label": "WEIGHT"
+    },
+    {
+     "key": "hazmat",
+     "label": "H.M."
+    },
+    {
+     "key": "description",
+     "label": "COMMODITY DESCRIPTION"
+    },
+    {
+     "key": "nmfc",
+     "label": "NMFC #"
+    },
+    {
+     "key": "class",
+     "label": "CLASS"
+    }
+   ],
+   "rows": [
+    [
+     "3",
+     "PLT",
+     "14",
+     "CTN",
+     "1876",
+     "",
+     "Kitchen cabinets, wood, assembled, crated",
+     "39270-3",
+     "110"
+    ],
+    [
+     "2",
+     "PLT",
+     "22",
+     "CTN",
+     "1320",
+     "",
+     "Cabinet doors and drawer fronts, boxed",
+     "39280",
+     "85"
+    ],
+    [
+     "1",
+     "CRT",
+     "1",
+     "PC",
+     "615",
+     "",
+     "Countertop, quartz, crated on A-frame",
+     "90425",
+     "70"
+    ],
+    [
+     "1",
+     "PLT",
+     "36",
+     "CTN",
+     "407",
+     "",
+     "Cabinet hardware, hinges and pulls",
+     "95190-9",
+     "77.5"
+    ],
+    [
+     "1",
+     "PLT",
+     "9",
+     "BDL",
+     "268",
+     "",
+     "Crown moulding, wood, bundled",
+     "111450",
+     "92.5"
+    ]
+   ]
+  }
+ ]
+}

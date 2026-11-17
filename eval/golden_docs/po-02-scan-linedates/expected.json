@@ -1,0 +1,227 @@
+{
+ "id": "po-02-scan-linedates",
+ "docType": "purchase_order",
+ "capture": "scan",
+ "difficulty": "medium",
+ "about": "A scanned PO with sixteen lines and a per-line required date column: dates in a table must come back as ISO dates on the right rows.",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "po_number": "PO-118-0447",
+  "po_date": "2026-11-05",
+  "buyer_name": "Stonebridge Mechanical Contractors",
+  "buyer_address": "3900 Trades Way, Kansas City, MO 64120",
+  "vendor_name": "Midland Pipe & Valve",
+  "vendor_address": "1415 Supply Avenue, Omaha, NE 68110",
+  "ship_to_name": "Jobsite: Lakeshore Medical Pavilion",
+  "ship_to_address": "2600 Lakeshore Drive, Gate 3, Kansas City, MO 64116",
+  "payment_terms": "Net 45",
+  "freight_terms": "Jobsite, freight allowed",
+  "requested_by": "T. Okonkwo",
+  "subtotal": "20312.90",
+  "tax_total": "0.00",
+  "total": "20312.90"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "line_number",
+     "label": "Ln"
+    },
+    {
+     "key": "sku",
+     "label": "Item"
+    },
+    {
+     "key": "description",
+     "label": "Description"
+    },
+    {
+     "key": "quantity",
+     "label": "Qty"
+    },
+    {
+     "key": "unit",
+     "label": "UM"
+    },
+    {
+     "key": "unit_price",
+     "label": "Price"
+    },
+    {
+     "key": "delivery_date",
+     "label": "Req. date"
+    },
+    {
+     "key": "amount",
+     "label": "Ext."
+    }
+   ],
+   "rows": [
+    [
+     "1",
+     "CU-L-34-20",
+     "Copper tube type L, 3/4 in x 20 ft",
+     "60",
+     "LG",
+     "58.40",
+     "2026-11-12",
+     "3504.00"
+    ],
+    [
+     "2",
+     "CU-L-1-20",
+     "Copper tube type L, 1 in x 20 ft",
+     "40",
+     "LG",
+     "84.15",
+     "2026-11-12",
+     "3366.00"
+    ],
+    [
+     "3",
+     "CU-L-2-20",
+     "Copper tube type L, 2 in x 20 ft",
+     "18",
+     "LG",
+     "236.00",
+     "2026-11-12",
+     "4248.00"
+    ],
+    [
+     "4",
+     "EL-90-34",
+     "90 elbow, wrot copper, 3/4 in",
+     "250",
+     "EA",
+     "1.92",
+     "2026-11-12",
+     "480.00"
+    ],
+    [
+     "5",
+     "EL-90-1",
+     "90 elbow, wrot copper, 1 in",
+     "160",
+     "EA",
+     "3.75",
+     "2026-11-12",
+     "600.00"
+    ],
+    [
+     "6",
+     "TE-34",
+     "Tee, wrot copper, 3/4 in",
+     "120",
+     "EA",
+     "3.10",
+     "2026-11-12",
+     "372.00"
+    ],
+    [
+     "7",
+     "CP-1",
+     "Coupling, wrot copper, 1 in",
+     "100",
+     "EA",
+     "2.24",
+     "2026-11-12",
+     "224.00"
+    ],
+    [
+     "8",
+     "BV-34-PF",
+     "Ball valve 3/4 in, press, full port",
+     "48",
+     "EA",
+     "21.60",
+     "2026-11-19",
+     "1036.80"
+    ],
+    [
+     "9",
+     "BV-1-PF",
+     "Ball valve 1 in, press, full port",
+     "36",
+     "EA",
+     "33.85",
+     "2026-11-19",
+     "1218.60"
+    ],
+    [
+     "10",
+     "BV-2-PF",
+     "Ball valve 2 in, press, full port",
+     "10",
+     "EA",
+     "112.40",
+     "2026-11-19",
+     "1124.00"
+    ],
+    [
+     "11",
+     "CV-2-SW",
+     "Check valve 2 in, swing, bronze",
+     "4",
+     "EA",
+     "148.75",
+     "2026-11-19",
+     "595.00"
+    ],
+    [
+     "12",
+     "HG-CLV-34",
+     "Clevis hanger 3/4 in, galvanized",
+     "300",
+     "EA",
+     "1.18",
+     "2026-11-12",
+     "354.00"
+    ],
+    [
+     "13",
+     "HG-CLV-2",
+     "Clevis hanger 2 in, galvanized",
+     "90",
+     "EA",
+     "2.65",
+     "2026-11-12",
+     "238.50"
+    ],
+    [
+     "14",
+     "ROD-38-10",
+     "Threaded rod 3/8-16 x 10 ft, zinc",
+     "80",
+     "EA",
+     "6.30",
+     "2026-11-12",
+     "504.00"
+    ],
+    [
+     "15",
+     "INS-34-1",
+     "Fiberglass pipe insulation 3/4 x 1 in, 3 ft",
+     "400",
+     "EA",
+     "4.05",
+     "2026-12-03",
+     "1620.00"
+    ],
+    [
+     "16",
+     "INS-2-1",
+     "Fiberglass pipe insulation 2 x 1 in, 3 ft",
+     "120",
+     "EA",
+     "6.90",
+     "2026-12-03",
+     "828.00"
+    ]
+   ]
+  }
+ ]
+}

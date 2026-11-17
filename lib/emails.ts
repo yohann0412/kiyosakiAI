@@ -25,9 +25,29 @@ export function normalizeEmail(value: unknown): string | null {
  * matters because the whole point is being able to write back.
  * DNS trouble on our side never blocks a real address.
  */
+let resolverCheck: { ok: boolean; at: number } | null = null;
+
+/**
+ * Can this runtime resolve DNS at all? Some sandboxes cannot, and there every
+ * lookup fails the same way a mistyped domain does. Without this control we
+ * would turn away every real address.
+ */
+async function resolverWorks(): Promise<boolean> {
+  if (resolverCheck && Date.now() - resolverCheck.at < 10 * 60_000) return resolverCheck.ok;
+  let ok = false;
+  try {
+    ok = (await dns.resolveMx("gmail.com")).length > 0;
+  } catch {
+    ok = false;
+  }
+  resolverCheck = { ok, at: Date.now() };
+  return ok;
+}
+
 export async function domainAcceptsMail(email: string): Promise<boolean> {
   const domain = email.slice(email.lastIndexOf("@") + 1);
   const lookup = (async () => {
+    if (!(await resolverWorks())) return true;
     try {
       const records = await dns.resolveMx(domain);
       return records.length > 0;

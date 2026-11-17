@@ -1,0 +1,2 @@
+date	id	kind	change	metric	before	after	cost_usd	decision	notes
+2026-11-17	E000	build	Day 0: tool, 7 search pages, eval set of 19 documents, nightly tooling	unit_tests_passing	0	121	0.00	keep	No model key in the build session, so no accuracy baseline yet. First eval run is experiment E001.

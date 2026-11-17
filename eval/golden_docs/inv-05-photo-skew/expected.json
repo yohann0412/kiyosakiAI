@@ -1,0 +1,115 @@
+{
+ "id": "inv-05-photo-skew",
+ "docType": "invoice",
+ "capture": "photo",
+ "difficulty": "hard",
+ "about": "A counter invoice photographed at an angle on a dark surface with a shadow across the corner. Includes a negative line (core return) that must stay negative.",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "invoice_number": "R-558201",
+  "invoice_date": "2026-10-07",
+  "vendor_name": "Riverside Auto Parts",
+  "vendor_address": "902 River Road, Chattanooga, TN 37405",
+  "customer_name": "Tri-County Towing & Repair",
+  "bill_to_address": "5512 Dayton Blvd, Red Bank, TN 37415",
+  "po_number": "VERBAL-JIM",
+  "payment_terms": "Charge account",
+  "subtotal": "786.33",
+  "tax_total": "72.74",
+  "total": "859.07"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "sku",
+     "label": "Part #"
+    },
+    {
+     "key": "description",
+     "label": "Description"
+    },
+    {
+     "key": "quantity",
+     "label": "Qty"
+    },
+    {
+     "key": "unit_price",
+     "label": "Price"
+    },
+    {
+     "key": "amount",
+     "label": "Total"
+    }
+   ],
+   "rows": [
+    [
+     "ALT-7861N",
+     "Alternator, new, 150 amp",
+     "1",
+     "214.99",
+     "214.99"
+    ],
+    [
+     "CORE-ALT",
+     "Core charge",
+     "1",
+     "45.00",
+     "45.00"
+    ],
+    [
+     "CORE-RTN",
+     "Core return credit",
+     "1",
+     "-45.00",
+     "-45.00"
+    ],
+    [
+     "BLT-6PK1070",
+     "Serpentine belt 6PK1070",
+     "1",
+     "32.49",
+     "32.49"
+    ],
+    [
+     "PAD-D1084C",
+     "Brake pads, ceramic, front",
+     "2",
+     "58.75",
+     "117.50"
+    ],
+    [
+     "ROT-31257",
+     "Brake rotor, front",
+     "4",
+     "46.20",
+     "184.80"
+    ],
+    [
+     "FLD-DOT3-QT",
+     "Brake fluid DOT 3, quart",
+     "3",
+     "9.89",
+     "29.67"
+    ],
+    [
+     "OIL-5W30-5Q",
+     "Motor oil 5W-30 full synthetic, 5 qt",
+     "6",
+     "27.99",
+     "167.94"
+    ],
+    [
+     "FLT-PH3614",
+     "Oil filter",
+     "6",
+     "6.49",
+     "38.94"
+    ]
+   ]
+  }
+ ]
+}

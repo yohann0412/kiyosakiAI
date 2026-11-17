@@ -1,0 +1,109 @@
+{
+ "id": "po-01-clean-pdf",
+ "docType": "purchase_order",
+ "capture": "pdf",
+ "difficulty": "easy",
+ "about": "Baseline purchase order: buyer, vendor, ship-to, an info strip and five priced lines.",
+ "files": [
+  "document.pdf"
+ ],
+ "fields": {
+  "po_number": "4500771920",
+  "po_date": "2026-10-12",
+  "buyer_name": "Wexford Brewing Company",
+  "buyer_address": "210 Hop Yard Lane, Asheville, NC 28806",
+  "vendor_name": "Carolina Malt & Grain",
+  "vendor_address": "77 Elevator Road, Salisbury, NC 28144",
+  "ship_to_name": "Wexford Brewing Company, Brewhouse Dock",
+  "ship_to_address": "214 Hop Yard Lane, Asheville, NC 28806",
+  "delivery_date": "2026-10-26",
+  "payment_terms": "Net 30",
+  "ship_method": "Vendor truck",
+  "requested_by": "Priya Nair",
+  "subtotal": "4799.40",
+  "shipping_total": "140.00",
+  "total": "4939.40"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "line_number",
+     "label": "#"
+    },
+    {
+     "key": "sku",
+     "label": "Vendor item"
+    },
+    {
+     "key": "description",
+     "label": "Description"
+    },
+    {
+     "key": "quantity",
+     "label": "Qty"
+    },
+    {
+     "key": "unit",
+     "label": "UOM"
+    },
+    {
+     "key": "unit_price",
+     "label": "Unit price"
+    },
+    {
+     "key": "amount",
+     "label": "Amount"
+    }
+   ],
+   "rows": [
+    [
+     "1",
+     "CMG-2ROW-55",
+     "Pale malt, 2-row, 55 lb sack",
+     "80",
+     "SK",
+     "41.50",
+     "3320.00"
+    ],
+    [
+     "2",
+     "CMG-MUN-55",
+     "Munich malt 10L, 55 lb sack",
+     "12",
+     "SK",
+     "46.75",
+     "561.00"
+    ],
+    [
+     "3",
+     "CMG-C60-55",
+     "Caramel malt 60L, 55 lb sack",
+     "8",
+     "SK",
+     "52.10",
+     "416.80"
+    ],
+    [
+     "4",
+     "CMG-OAT-50",
+     "Flaked oats, 50 lb sack",
+     "10",
+     "SK",
+     "38.20",
+     "382.00"
+    ],
+    [
+     "5",
+     "CMG-RICE-50",
+     "Rice hulls, 50 lb sack",
+     "4",
+     "SK",
+     "29.90",
+     "119.60"
+    ]
+   ]
+  }
+ ]
+}

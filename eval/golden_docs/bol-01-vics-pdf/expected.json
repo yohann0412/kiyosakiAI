@@ -1,0 +1,166 @@
+{
+ "id": "bol-01-vics-pdf",
+ "docType": "bill_of_lading",
+ "capture": "pdf",
+ "difficulty": "medium",
+ "about": "A digital standard straight BOL: two tables (customer orders and carrier information), prepaid checkbox, one hazmat line marked with an X.",
+ "files": [
+  "document.pdf"
+ ],
+ "fields": {
+  "bol_number": "00614870000228841",
+  "ship_date": "2026-10-21",
+  "shipper_name": "Ashgrove Paint & Coatings",
+  "shipper_address": "1200 Solvent Way, Door 7, Louisville, KY 40211",
+  "consignee_name": "Homestead Hardware Distribution",
+  "consignee_address": "9500 Crossdock Parkway, Indianapolis, IN 46241",
+  "carrier_name": "Bluegrass Regional Carriers",
+  "scac": "BGRC",
+  "pro_number": "4410-882917",
+  "trailer_number": "T-20931",
+  "seal_number": "A7781204",
+  "po_number": "HH-771820, HH-771821, HH-771826",
+  "freight_terms": "Prepaid",
+  "special_instructions": "Liftgate not required. Receiving hours 6am to 2pm.",
+  "total_handling_units": "8",
+  "total_packages": "322",
+  "total_weight": "10870 lb"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "handling_unit_qty",
+     "label": "QTY"
+    },
+    {
+     "key": "handling_unit_type",
+     "label": "TYPE"
+    },
+    {
+     "key": "package_qty",
+     "label": "QTY"
+    },
+    {
+     "key": "package_type",
+     "label": "TYPE"
+    },
+    {
+     "key": "weight",
+     "label": "WEIGHT"
+    },
+    {
+     "key": "hazmat",
+     "label": "H.M."
+    },
+    {
+     "key": "description",
+     "label": "COMMODITY DESCRIPTION"
+    },
+    {
+     "key": "nmfc",
+     "label": "NMFC #"
+    },
+    {
+     "key": "class",
+     "label": "CLASS"
+    }
+   ],
+   "rows": [
+    [
+     "4",
+     "PLT",
+     "192",
+     "CTN",
+     "6912",
+     "",
+     "Latex paint, interior, in cans, non-flammable",
+     "149980-2",
+     "55"
+    ],
+    [
+     "2",
+     "PLT",
+     "72",
+     "CTN",
+     "2448",
+     "X",
+     "UN1263, Paint, 3, PG II",
+     "149980-1",
+     "60"
+    ],
+    [
+     "1",
+     "PLT",
+     "40",
+     "CTN",
+     "520",
+     "",
+     "Paint rollers and brushes, boxed",
+     "30200",
+     "100"
+    ],
+    [
+     "1",
+     "SKID",
+     "18",
+     "PAIL",
+     "990",
+     "",
+     "Joint compound, premixed, in pails",
+     "42605",
+     "55"
+    ]
+   ]
+  },
+  {
+   "name": "Customer orders",
+   "columns": [
+    {
+     "key": "order_number",
+     "label": "CUSTOMER ORDER NUMBER"
+    },
+    {
+     "key": "package_qty",
+     "label": "# PKGS"
+    },
+    {
+     "key": "weight",
+     "label": "WEIGHT"
+    },
+    {
+     "key": "pallet_slip",
+     "label": "PALLET/SLIP (Y/N)"
+    },
+    {
+     "key": "additional_info",
+     "label": "ADDITIONAL SHIPPER INFO"
+    }
+   ],
+   "rows": [
+    [
+     "HH-771820",
+     "192",
+     "6912",
+     "Y",
+     "Store replenishment"
+    ],
+    [
+     "HH-771821",
+     "72",
+     "2448",
+     "Y",
+     "Hazmat: placard required"
+    ],
+    [
+     "HH-771826",
+     "58",
+     "1510",
+     "Y",
+     "Promo endcap"
+    ]
+   ]
+  }
+ ]
+}

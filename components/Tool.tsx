@@ -208,7 +208,19 @@ export function Tool({ page, docType = "auto", sample }: { page: string; docType
         patch(item.id, { status: "working" });
         try {
           const prepared = await prepareFile(item.file, limits.maxUploadBytes, limits.maxPages);
-          const response = await extract(prepared, { page, docType: hintRef.current, bulk: true, signal: controller.signal });
+          let response;
+          for (let attempt = 0; ; attempt++) {
+            try {
+              response = await extract(prepared, { page, docType: hintRef.current, bulk: true, signal: controller.signal });
+              break;
+            } catch (error) {
+              // The per-minute limit is there to stop scripts, not batches: wait and carry on.
+              if (!(error instanceof ApiError && error.code === "slow_down") || attempt >= 8) throw error;
+              patch(item.id, { message: "Pacing uploads..." });
+              await new Promise((resolve) => setTimeout(resolve, 8000));
+              if (controller.signal.aborted) return;
+            }
+          }
           applyAllowance(response.allowance);
           patch(item.id, {
             status: "done",
@@ -536,7 +548,7 @@ export function Tool({ page, docType = "auto", sample }: { page: string; docType
                         : item.status === "error"
                           ? item.message
                           : item.status === "working"
-                            ? "Reading..."
+                            ? (item.message ?? "Reading...")
                             : "Waiting"}
                     </span>
                   </span>

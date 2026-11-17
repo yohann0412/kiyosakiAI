@@ -81,9 +81,13 @@ export function ResultView({
 
   const doc: TabularDoc = useMemo(() => ({ docType: result.docType, fields, tables }), [result.docType, fields, tables]);
 
+  // Report edits upward. The callback is held in a ref so that a parent passing
+  // a new function on every render cannot start a render loop.
+  const onDocChangeRef = useRef(onDocChange);
+  onDocChangeRef.current = onDocChange;
   useEffect(() => {
-    onDocChange?.(doc);
-  }, [doc, onDocChange]);
+    onDocChangeRef.current?.(doc);
+  }, [doc]);
 
   useEffect(() => {
     if (!menu) return;

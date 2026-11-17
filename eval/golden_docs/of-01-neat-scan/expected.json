@@ -1,0 +1,100 @@
+{
+ "id": "of-01-neat-scan",
+ "docType": "order_form",
+ "capture": "scan",
+ "difficulty": "medium",
+ "about": "A wholesale bakery order form filled in with neat block handwriting, scanned flat: item codes, prices and a handwritten total.",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "order_number": "22841",
+  "order_date": "2026-10-28",
+  "customer_name": "Harbor Light Coffee",
+  "customer_phone": "555-0171",
+  "customer_address": "14 Wharf Street",
+  "delivery_date": "2026-10-30",
+  "taken_by": "Sofia",
+  "notes": "Standing order, repeat Fri",
+  "subtotal": "233.30",
+  "total": "233.30"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "quantity",
+     "label": "Qty"
+    },
+    {
+     "key": "sku",
+     "label": "Code"
+    },
+    {
+     "key": "description",
+     "label": "Item"
+    },
+    {
+     "key": "unit_price",
+     "label": "Each"
+    },
+    {
+     "key": "amount",
+     "label": "Total"
+    }
+   ],
+   "rows": [
+    [
+     "24",
+     "CR-01",
+     "Butter croissant",
+     "1.85",
+     "44.40"
+    ],
+    [
+     "18",
+     "CR-04",
+     "Almond croissant",
+     "2.40",
+     "43.20"
+    ],
+    [
+     "12",
+     "MF-02",
+     "Blueberry muffin",
+     "1.95",
+     "23.40"
+    ],
+    [
+     "6",
+     "LF-11",
+     "Sourdough loaf",
+     "5.50",
+     "33.00"
+    ],
+    [
+     "30",
+     "BG-03",
+     "Everything bagel",
+     "0.95",
+     "28.50"
+    ],
+    [
+     "8",
+     "SC-05",
+     "Cheddar chive scone",
+     "2.10",
+     "16.80"
+    ],
+    [
+     "2",
+     "QC-09",
+     "Quiche, spinach, whole",
+     "22.00",
+     "44.00"
+    ]
+   ]
+  }
+ ]
+}

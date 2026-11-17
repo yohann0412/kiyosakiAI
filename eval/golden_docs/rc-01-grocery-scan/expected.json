@@ -1,0 +1,108 @@
+{
+ "id": "rc-01-grocery-scan",
+ "docType": "receipt",
+ "capture": "scan",
+ "difficulty": "easy",
+ "about": "A flat-scanned grocery receipt: item lines with and without quantity lines, and a coupon that must be a negative row.",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "merchant_name": "FERNHILL MARKET",
+  "merchant_address": "1220 Fernhill Road, Eugene, OR 97401",
+  "merchant_phone": "(541) 555-0128",
+  "receipt_number": "7719-0042",
+  "date": "2026-10-30",
+  "time": "17:48",
+  "payment_method": "DEBIT",
+  "card_last4": "9031",
+  "subtotal": "57.31",
+  "tax_total": "0.00",
+  "total": "57.31"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "description",
+     "label": ""
+    },
+    {
+     "key": "quantity",
+     "label": ""
+    },
+    {
+     "key": "unit_price",
+     "label": ""
+    },
+    {
+     "key": "amount",
+     "label": ""
+    }
+   ],
+   "rows": [
+    [
+     "ORG WHOLE MILK GAL",
+     "",
+     "",
+     "6.49"
+    ],
+    [
+     "LARGE EGGS DZ",
+     "2",
+     "3.99",
+     "7.98"
+    ],
+    [
+     "SOURDOUGH LOAF",
+     "",
+     "",
+     "5.25"
+    ],
+    [
+     "BANANAS",
+     "",
+     "",
+     "1.87"
+    ],
+    [
+     "GROUND COFFEE 12OZ",
+     "",
+     "",
+     "11.99"
+    ],
+    [
+     "STORE COUPON COFFEE",
+     "",
+     "",
+     "-2.00"
+    ],
+    [
+     "GREEK YOGURT 32OZ",
+     "2",
+     "5.49",
+     "10.98"
+    ],
+    [
+     "CHEDDAR BLOCK 8OZ",
+     "",
+     "",
+     "4.79"
+    ],
+    [
+     "PASTA RIGATONI 1LB",
+     "3",
+     "1.89",
+     "5.67"
+    ],
+    [
+     "MARINARA SAUCE 24OZ",
+     "",
+     "",
+     "4.29"
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,142 @@
+{
+ "id": "bol-03-photo-corrected",
+ "docType": "bill_of_lading",
+ "capture": "photo",
+ "difficulty": "hard",
+ "about": "A dock photo of a BOL where one printed weight was struck through and corrected by hand. The corrected weight is the right answer; third-party terms.",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "bol_number": "07302110009904416",
+  "ship_date": "2026-11-10",
+  "shipper_name": "Three Forks Bottling Co.",
+  "shipper_address": "88 Spring Street, Dock 2, Bozeman, MT 59715",
+  "consignee_name": "Summit Natural Grocers Warehouse",
+  "consignee_address": "4200 Distribution Way, Salt Lake City, UT 84104",
+  "bill_to_name": "Clearwater Logistics Services",
+  "carrier_name": "High Plains Freightways",
+  "scac": "HPFW",
+  "pro_number": "9027715540",
+  "trailer_number": "53R-4418",
+  "seal_number": "0098127",
+  "po_number": "SNG-40021",
+  "freight_terms": "3rd Party",
+  "special_instructions": "Protect from freezing. Appointment: 801-555-0190.",
+  "total_handling_units": "9",
+  "total_packages": "540",
+  "total_weight": "16140 lb"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "handling_unit_qty",
+     "label": "QTY"
+    },
+    {
+     "key": "handling_unit_type",
+     "label": "TYPE"
+    },
+    {
+     "key": "package_qty",
+     "label": "QTY"
+    },
+    {
+     "key": "package_type",
+     "label": "TYPE"
+    },
+    {
+     "key": "weight",
+     "label": "WEIGHT"
+    },
+    {
+     "key": "hazmat",
+     "label": "H.M."
+    },
+    {
+     "key": "description",
+     "label": "COMMODITY DESCRIPTION"
+    },
+    {
+     "key": "nmfc",
+     "label": "NMFC #"
+    },
+    {
+     "key": "class",
+     "label": "CLASS"
+    }
+   ],
+   "rows": [
+    [
+     "6",
+     "PLT",
+     "360",
+     "CS",
+     "11520",
+     "",
+     "Sparkling water, in glass bottles, 12 x 750 ml",
+     "73260",
+     "65"
+    ],
+    [
+     "2",
+     "PLT",
+     "120",
+     "CS",
+     "3480",
+     "",
+     "Kombucha, refrigerated, in glass, 12 x 16 oz",
+     "73227",
+     "70"
+    ],
+    [
+     "1",
+     "PLT",
+     "60",
+     "CS",
+     "1140",
+     "",
+     "Cold brew concentrate, in cartons",
+     "73227",
+     "70"
+    ]
+   ]
+  },
+  {
+   "name": "Customer orders",
+   "columns": [
+    {
+     "key": "order_number",
+     "label": "CUSTOMER ORDER NUMBER"
+    },
+    {
+     "key": "package_qty",
+     "label": "# PKGS"
+    },
+    {
+     "key": "weight",
+     "label": "WEIGHT"
+    },
+    {
+     "key": "pallet_slip",
+     "label": "PALLET/SLIP (Y/N)"
+    },
+    {
+     "key": "additional_info",
+     "label": "ADDITIONAL SHIPPER INFO"
+    }
+   ],
+   "rows": [
+    [
+     "SNG-40021",
+     "540",
+     "16140",
+     "Y",
+     "Keep upright"
+    ]
+   ]
+  }
+ ]
+}

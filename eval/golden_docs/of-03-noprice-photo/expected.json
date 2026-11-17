@@ -1,0 +1,98 @@
+{
+ "id": "of-03-noprice-photo",
+ "docType": "order_form",
+ "capture": "photo",
+ "difficulty": "hard",
+ "about": "A counter order pad photographed at a steep angle: quantities with units and item codes, no prices at all, so there is no arithmetic to lean on.",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "order_number": "5507",
+  "order_date": "2026-11-12",
+  "customer_name": "Ridgeview Elementary Kitchen",
+  "customer_address": "400 School House Road",
+  "delivery_date": "2026-11-16",
+  "taken_by": "Lorraine",
+  "notes": "Deliver to rear dock, ring bell"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "quantity",
+     "label": "Qty"
+    },
+    {
+     "key": "unit",
+     "label": "Unit"
+    },
+    {
+     "key": "sku",
+     "label": "Item #"
+    },
+    {
+     "key": "description",
+     "label": "Description"
+    }
+   ],
+   "rows": [
+    [
+     "12",
+     "cs",
+     "40-118",
+     "Foam trays 5 compartment"
+    ],
+    [
+     "6",
+     "cs",
+     "40-233",
+     "Sporks, wrapped"
+    ],
+    [
+     "4",
+     "cs",
+     "22-007",
+     "Milk cooler liners"
+    ],
+    [
+     "20",
+     "ea",
+     "61-450",
+     "Sheet pan, full size"
+    ],
+    [
+     "3",
+     "bx",
+     "61-902",
+     "Oven mitts 17 in"
+    ],
+    [
+     "8",
+     "cs",
+     "18-340",
+     "Can liners 44 gal"
+    ],
+    [
+     "2",
+     "ea",
+     "75-016",
+     "Probe thermometer"
+    ],
+    [
+     "10",
+     "gal",
+     "90-555",
+     "Degreaser concentrate"
+    ],
+    [
+     "1",
+     "ea",
+     "33-871",
+     "Mop bucket with wringer"
+    ]
+   ]
+  }
+ ]
+}

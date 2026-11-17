@@ -14,8 +14,9 @@ export const tuning = {
   ipDailyAnon: 8,
   /** Hard ceiling per IP per day, email or not. */
   ipDailyMax: 60,
-  /** Uploads per IP per minute. */
+  /** Uploads per IP per minute without an email, and with one (bulk runs need headroom). */
   burstPerMinute: 6,
+  burstPerMinuteEmail: 12,
   /** Files per bulk batch (bulk needs an email). */
   bulkMaxFiles: 25,
   /**

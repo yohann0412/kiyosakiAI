@@ -1,0 +1,124 @@
+{
+ "id": "ps-02-scan-backorder",
+ "docType": "packing_slip",
+ "capture": "scan",
+ "difficulty": "medium",
+ "about": "A scanned industrial packing slip in a typewriter face: ordered, shipped and backordered columns with deliberately blank cells, plus lot numbers.",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "packing_slip_number": "330918",
+  "order_number": "SO-771204",
+  "po_number": "HMC-22871",
+  "ship_date": "2026-10-27",
+  "shipper_name": "Great Lakes Fastener & Supply",
+  "ship_from_address": "4100 Steel Yard Drive, Toledo, OH 43612",
+  "ship_to_name": "Hartwell Machine Co. Receiving",
+  "ship_to_address": "780 Tooling Park Road, Fort Wayne, IN 46808",
+  "carrier": "Old Line Motor Freight",
+  "ship_method": "LTL",
+  "total_packages": "11",
+  "total_weight": "642 lb"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "sku",
+     "label": "Part Number"
+    },
+    {
+     "key": "description",
+     "label": "Description"
+    },
+    {
+     "key": "quantity_ordered",
+     "label": "Ord"
+    },
+    {
+     "key": "quantity_shipped",
+     "label": "Ship"
+    },
+    {
+     "key": "quantity_backordered",
+     "label": "B/O"
+    },
+    {
+     "key": "unit",
+     "label": "UM"
+    },
+    {
+     "key": "lot_number",
+     "label": "Lot"
+    }
+   ],
+   "rows": [
+    [
+     "HCS-38-16X2",
+     "Hex cap screw 3/8-16 x 2 in, Gr 8, zinc",
+     "2000",
+     "2000",
+     "",
+     "EA",
+     "L2610-4417"
+    ],
+    [
+     "HCS-12-13X3",
+     "Hex cap screw 1/2-13 x 3 in, Gr 8, zinc",
+     "1200",
+     "800",
+     "400",
+     "EA",
+     "L2609-1180"
+    ],
+    [
+     "NUT-38-16-NY",
+     "Nylon insert lock nut 3/8-16",
+     "2500",
+     "2500",
+     "",
+     "EA",
+     "L2610-2033"
+    ],
+    [
+     "WSH-38-FLT",
+     "Flat washer 3/8 USS, hardened",
+     "5000",
+     "5000",
+     "",
+     "EA",
+     "L2608-9921"
+    ],
+    [
+     "SHCS-M8X30",
+     "Socket head cap screw M8-1.25 x 30, 12.9",
+     "600",
+     "",
+     "600",
+     "EA",
+     ""
+    ],
+    [
+     "PIN-DWL-14X1",
+     "Dowel pin 1/4 x 1 in, alloy steel",
+     "1000",
+     "1000",
+     "",
+     "EA",
+     "L2607-5540"
+    ],
+    [
+     "ROD-TH-58-6",
+     "Threaded rod 5/8-11 x 6 ft, B7",
+     "40",
+     "36",
+     "4",
+     "EA",
+     "L2610-7702"
+    ]
+   ]
+  }
+ ]
+}

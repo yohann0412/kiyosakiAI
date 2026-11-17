@@ -1,0 +1,106 @@
+{
+ "id": "ps-03-export-photo",
+ "docType": "packing_slip",
+ "capture": "photo",
+ "difficulty": "hard",
+ "about": "An export packing list photographed on a carton: carton ranges, net and gross weights in kg and dimensions (columns outside the catalog that must be kept under their printed headers).",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "packing_slip_number": "PL-EX-20261104",
+  "order_number": "EXP-5521",
+  "po_number": "NK-PO-88172",
+  "ship_date": "2026-11-04",
+  "shipper_name": "Cascadia Ceramics Ltd.",
+  "ship_from_address": "55 Kiln Lane, Tacoma, WA 98421, USA",
+  "ship_to_name": "Nordkeramik Handel AB",
+  "ship_to_address": "Hamngatan 21, 411 14 Gothenburg, Sweden",
+  "carrier": "Pacific Bridge Forwarding",
+  "ship_method": "Ocean LCL",
+  "total_packages": "38",
+  "total_weight": "612.4 kg"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "carton",
+     "label": "Carton no."
+    },
+    {
+     "key": "sku",
+     "label": "Item"
+    },
+    {
+     "key": "description",
+     "label": "Description of goods"
+    },
+    {
+     "key": "quantity_shipped",
+     "label": "Qty (pcs)"
+    },
+    {
+     "key": "net_weight_kg",
+     "label": "Net wt (kg)"
+    },
+    {
+     "key": "weight",
+     "label": "Gross wt (kg)"
+    },
+    {
+     "key": "dimensions_cm",
+     "label": "Dimensions (cm)"
+    }
+   ],
+   "rows": [
+    [
+     "1-12",
+     "CC-MUG-SPK",
+     "Stoneware mug, speckled white, 350 ml",
+     "576",
+     "172.8",
+     "196.8",
+     "40 x 30 x 28"
+    ],
+    [
+     "13-20",
+     "CC-BWL-18",
+     "Serving bowl 18 cm, matte grey",
+     "192",
+     "124.8",
+     "140.0",
+     "42 x 42 x 24"
+    ],
+    [
+     "21-30",
+     "CC-PLT-27",
+     "Dinner plate 27 cm, matte grey",
+     "240",
+     "158.4",
+     "176.0",
+     "32 x 32 x 30"
+    ],
+    [
+     "31-36",
+     "CC-VAS-22",
+     "Bud vase 22 cm, celadon",
+     "144",
+     "64.8",
+     "76.2",
+     "38 x 28 x 30"
+    ],
+    [
+     "37-38",
+     "CC-SMP-SET",
+     "Sample set, assorted glazes",
+     "24",
+     "19.6",
+     "23.4",
+     "36 x 26 x 22"
+    ]
+   ]
+  }
+ ]
+}

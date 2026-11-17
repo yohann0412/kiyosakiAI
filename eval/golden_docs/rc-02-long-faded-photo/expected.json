@@ -1,0 +1,220 @@
+{
+ "id": "rc-02-long-faded-photo",
+ "docType": "receipt",
+ "capture": "photo",
+ "difficulty": "hard",
+ "about": "A long, faded thermal receipt from a building-supply store, photographed: 24 items, item codes, contractor discount rows.",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "merchant_name": "TIMBERLINE BUILDING SUPPLY",
+  "merchant_address": "8400 Mill Pond Road, Bend, OR 97701",
+  "merchant_phone": "(541) 555-0182",
+  "receipt_number": "02-557184",
+  "date": "2026-11-06",
+  "time": "07:12",
+  "payment_method": "MASTERCARD",
+  "card_last4": "2208",
+  "subtotal": "1633.31",
+  "tax_total": "0.00",
+  "total": "1633.31"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "sku",
+     "label": ""
+    },
+    {
+     "key": "description",
+     "label": ""
+    },
+    {
+     "key": "quantity",
+     "label": ""
+    },
+    {
+     "key": "unit_price",
+     "label": ""
+    },
+    {
+     "key": "amount",
+     "label": ""
+    }
+   ],
+   "rows": [
+    [
+     "204118",
+     "2X4X8 STUD KD",
+     "48",
+     "3.87",
+     "185.76"
+    ],
+    [
+     "204220",
+     "2X6X12 #2 DF",
+     "16",
+     "9.64",
+     "154.24"
+    ],
+    [
+     "211007",
+     "OSB 7/16 4X8",
+     "22",
+     "13.48",
+     "296.56"
+    ],
+    [
+     "211044",
+     "PLYWD CDX 1/2 4X8",
+     "10",
+     "24.90",
+     "249.00"
+    ],
+    [
+     "330125",
+     "FRAMING NAIL 3IN 2M",
+     "2",
+     "42.99",
+     "85.98"
+    ],
+    [
+     "330190",
+     "DECK SCREW 3IN 5LB",
+     "3",
+     "27.49",
+     "82.47"
+    ],
+    [
+     "330402",
+     "JOIST HANGER 2X6",
+     "40",
+     "1.28",
+     "51.20"
+    ],
+    [
+     "330418",
+     "HURRICANE TIE H2.5A",
+     "60",
+     "0.74",
+     "44.40"
+    ],
+    [
+     "412003",
+     "HOUSEWRAP 9X100",
+     "",
+     "",
+     "118.00"
+    ],
+    [
+     "412019",
+     "SEAM TAPE 1-7/8X165",
+     "4",
+     "8.97",
+     "35.88"
+    ],
+    [
+     "412230",
+     "FLASHING TAPE 4IN",
+     "2",
+     "21.50",
+     "43.00"
+    ],
+    [
+     "518800",
+     "CONSTR ADHESIVE 28OZ",
+     "12",
+     "6.48",
+     "77.76"
+    ],
+    [
+     "518812",
+     "SUBFLOOR ADH 28OZ",
+     "6",
+     "7.25",
+     "43.50"
+    ],
+    [
+     "602117",
+     "CHALK LINE REEL",
+     "",
+     "",
+     "12.97"
+    ],
+    [
+     "602140",
+     "CARPENTER PENCIL 12",
+     "",
+     "",
+     "4.49"
+    ],
+    [
+     "602255",
+     "UTILITY BLADES 100",
+     "",
+     "",
+     "17.99"
+    ],
+    [
+     "701034",
+     "SAFETY GLASSES CLR",
+     "4",
+     "3.98",
+     "15.92"
+    ],
+    [
+     "701060",
+     "WORK GLOVES LG",
+     "3",
+     "9.99",
+     "29.97"
+    ],
+    [
+     "805511",
+     "SAWZALL BLADE 9IN 5",
+     "2",
+     "18.47",
+     "36.94"
+    ],
+    [
+     "805530",
+     "CIRC BLADE 7-1/4 24T",
+     "3",
+     "11.97",
+     "35.91"
+    ],
+    [
+     "900001",
+     "CONTRACTOR DISC 5%",
+     "",
+     "",
+     "-81.10"
+    ],
+    [
+     "910220",
+     "LUMBER TARP 12X16",
+     "",
+     "",
+     "24.98"
+    ],
+    [
+     "910245",
+     "RATCHET STRAP 4PK",
+     "",
+     "",
+     "22.49"
+    ],
+    [
+     "999010",
+     "DELIVERY FEE ZONE 2",
+     "",
+     "",
+     "45.00"
+    ]
+   ]
+  }
+ ]
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useCallback, useMemo, useRef, type KeyboardEvent } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, type KeyboardEvent } from "react";
 import { labelFromKey, toKey } from "@/core/extractor/doctypes";
 import type { CellFlag, ExtractedTable } from "@/core/extractor/types";
 import { PlusIcon, TrashIcon, XIcon } from "./icons";
@@ -104,6 +104,17 @@ export function TableEditor({
 
   const flagGridRef = useRef(flagGrid);
   flagGridRef.current = flagGrid;
+  const focused = useRef<{ r: number; c: number } | null>(null);
+
+  // Keep the explanation in step with the focused cell as flags come and go
+  // (a cell can become flagged, or cleared, while the user is typing in it).
+  useEffect(() => {
+    const at = focused.current;
+    if (!at) return;
+    const reason = flagGrid[at.r]?.[at.c];
+    const column = table.columns[at.c];
+    onExplain(reason && column ? `Row ${at.r + 1} · ${column.label}: ${reason}` : null);
+  }, [flagGrid, table.columns, onExplain]);
 
   const onCell = useCallback(
     (r: number, c: number, value: string) => {
@@ -133,6 +144,7 @@ export function TableEditor({
 
   const onFocusCell = useCallback(
     (r: number, c: number) => {
+      focused.current = { r, c };
       const reason = flagGridRef.current[r]?.[c];
       const column = tableRef.current.columns[c];
       onExplain(reason ? `Row ${r + 1} · ${column.label}: ${reason}` : null);

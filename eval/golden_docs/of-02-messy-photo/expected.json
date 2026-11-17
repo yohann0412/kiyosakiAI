@@ -1,0 +1,104 @@
+{
+ "id": "of-02-messy-photo",
+ "docType": "order_form",
+ "capture": "photo",
+ "difficulty": "hard",
+ "about": "Rushed handwriting on a produce order form, photographed: ditto marks under the unit, a crossed-out line that must be skipped, decimals in prices.",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "order_date": "2026-11-04",
+  "customer_name": "Bistro Verde",
+  "customer_phone": "555-0139",
+  "delivery_date": "2026-11-05",
+  "taken_by": "Gus",
+  "notes": "Call if no romaine",
+  "total": "526.00"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "quantity",
+     "label": "Qty"
+    },
+    {
+     "key": "unit",
+     "label": "Unit"
+    },
+    {
+     "key": "description",
+     "label": "Item"
+    },
+    {
+     "key": "unit_price",
+     "label": "Price"
+    },
+    {
+     "key": "amount",
+     "label": "Total"
+    }
+   ],
+   "rows": [
+    [
+     "4",
+     "cs",
+     "Romaine hearts",
+     "28.50",
+     "114.00"
+    ],
+    [
+     "2",
+     "cs",
+     "Roma tomatoes",
+     "31.00",
+     "62.00"
+    ],
+    [
+     "1",
+     "cs",
+     "Lemons",
+     "44.00",
+     "44.00"
+    ],
+    [
+     "6",
+     "lb",
+     "Basil",
+     "9.75",
+     "58.50"
+    ],
+    [
+     "10",
+     "lb",
+     "Garlic, peeled",
+     "4.20",
+     "42.00"
+    ],
+    [
+     "15",
+     "lb",
+     "Shallots",
+     "2.90",
+     "43.50"
+    ],
+    [
+     "2",
+     "flat",
+     "Strawberries",
+     "36.00",
+     "72.00"
+    ],
+    [
+     "5",
+     "bu",
+     "Kale, lacinato",
+     "18.00",
+     "90.00"
+    ]
+   ]
+  }
+ ]
+}

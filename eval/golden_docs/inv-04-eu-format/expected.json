@@ -1,0 +1,106 @@
+{
+ "id": "inv-04-eu-format",
+ "docType": "invoice",
+ "capture": "pdf",
+ "difficulty": "medium",
+ "about": "European number and date formats: decimal commas, dot thousands separators, DD.MM.YYYY dates, VAT. The output must still be plain decimals and ISO dates.",
+ "files": [
+  "document.pdf"
+ ],
+ "fields": {
+  "invoice_number": "RE-2026-00871",
+  "invoice_date": "2026-11-03",
+  "due_date": "2026-11-17",
+  "vendor_name": "Lindqvist Werkzeuge GmbH",
+  "vendor_address": "Speicherstraße 14, 20457 Hamburg, Germany",
+  "vendor_tax_id": "DE298114562",
+  "customer_name": "Atelier Brandt",
+  "bill_to_address": "Kastanienallee 82, 10435 Berlin, Germany",
+  "payment_terms": "14 days net",
+  "currency": "EUR",
+  "subtotal": "2050.40",
+  "tax_total": "389.58",
+  "total": "2439.98"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "sku",
+     "label": "Art. no."
+    },
+    {
+     "key": "description",
+     "label": "Description"
+    },
+    {
+     "key": "quantity",
+     "label": "Qty"
+    },
+    {
+     "key": "unit",
+     "label": "Unit"
+    },
+    {
+     "key": "unit_price",
+     "label": "Unit price"
+    },
+    {
+     "key": "amount",
+     "label": "Total"
+    }
+   ],
+   "rows": [
+    [
+     "40-1182",
+     "Japanese pull saw, 240 mm, replaceable blade",
+     "6",
+     "pc",
+     "38.90",
+     "233.40"
+    ],
+    [
+     "40-2075",
+     "Bench chisel set, 6 pieces, chrome vanadium",
+     "4",
+     "set",
+     "124.50",
+     "498.00"
+    ],
+    [
+     "55-0310",
+     "Hard wax oil, natural, 2.5 l",
+     "12",
+     "can",
+     "61.75",
+     "741.00"
+    ],
+    [
+     "55-0444",
+     "Sanding sheets P180, 230 x 280 mm, pack of 50",
+     "20",
+     "pk",
+     "17.20",
+     "344.00"
+    ],
+    [
+     "70-9001",
+     "Sharpening service, plane irons",
+     "2.5",
+     "h",
+     "58.00",
+     "145.00"
+    ],
+    [
+     "90-0001",
+     "Pallet delivery, Berlin zone",
+     "1",
+     "pc",
+     "89.00",
+     "89.00"
+    ]
+   ]
+  }
+ ]
+}

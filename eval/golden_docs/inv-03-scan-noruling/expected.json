@@ -1,0 +1,115 @@
+{
+ "id": "inv-03-scan-noruling",
+ "docType": "invoice",
+ "capture": "scan",
+ "difficulty": "medium",
+ "about": "A scanned invoice with no ruling lines, a per-line discount column, a document-level discount and tax. Tests column alignment without a grid.",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "invoice_number": "348817",
+  "invoice_date": "2026-09-22",
+  "due_date": "2026-10-22",
+  "po_number": "DPM-0914",
+  "vendor_name": "Halvorsen Electric Supply Co.",
+  "vendor_address": "2740 Foundry Street, Duluth, MN 55806",
+  "customer_name": "Dunmore Property Management",
+  "bill_to_address": "118 Superior Avenue, Suite 400, Duluth, MN 55802",
+  "ship_to_address": "Kenwood Apartments, 2210 Kenwood Ave, Duluth, MN 55811",
+  "payment_terms": "1% 10 Net 30",
+  "subtotal": "1598.90",
+  "discount_total": "25.00",
+  "tax_total": "131.81",
+  "total": "1705.71"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "sku",
+     "label": "Part No."
+    },
+    {
+     "key": "description",
+     "label": "Description"
+    },
+    {
+     "key": "quantity",
+     "label": "Qty"
+    },
+    {
+     "key": "unit_price",
+     "label": "Unit Price"
+    },
+    {
+     "key": "discount",
+     "label": "Disc."
+    },
+    {
+     "key": "amount",
+     "label": "Amount"
+    }
+   ],
+   "rows": [
+    [
+     "GFI-15A-WH",
+     "GFCI receptacle 15A, tamper resistant, white",
+     "24",
+     "17.85",
+     "21.42",
+     "406.98"
+    ],
+    [
+     "BRK-20-1P",
+     "Circuit breaker 20A single pole, plug-in",
+     "12",
+     "8.40",
+     "",
+     "100.80"
+    ],
+    [
+     "THHN-12-BK",
+     "THHN wire 12 AWG stranded, black, 500 ft spool",
+     "3",
+     "112.00",
+     "16.80",
+     "319.20"
+    ],
+    [
+     "LED-A19-4PK",
+     "LED lamp A19 9W 2700K, 4 pack",
+     "40",
+     "6.95",
+     "",
+     "278.00"
+    ],
+    [
+     "BOX-4SQ-DP",
+     "4 in square box, 2-1/8 deep, with bracket",
+     "30",
+     "3.12",
+     "",
+     "93.60"
+    ],
+    [
+     "CVR-4SQ-BL",
+     "4 in square blank cover",
+     "30",
+     "0.88",
+     "",
+     "26.40"
+    ],
+    [
+     "SMK-HW-10Y",
+     "Smoke alarm, hardwired with 10 year battery backup",
+     "16",
+     "24.60",
+     "19.68",
+     "373.92"
+    ]
+   ]
+  }
+ ]
+}

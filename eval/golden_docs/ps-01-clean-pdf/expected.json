@@ -1,0 +1,69 @@
+{
+ "id": "ps-01-clean-pdf",
+ "docType": "packing_slip",
+ "capture": "pdf",
+ "difficulty": "easy",
+ "about": "Baseline packing slip from a web store: one quantity column, tracking number, no prices.",
+ "files": [
+  "document.pdf"
+ ],
+ "fields": {
+  "packing_slip_number": "PK-0091284",
+  "order_number": "WEB-448120",
+  "ship_date": "2026-10-19",
+  "shipper_name": "Juniper & Pine Outfitters",
+  "ship_from_address": "320 Canyon Road, Unit B, Flagstaff, AZ 86001",
+  "ship_to_name": "Dana Whitfield",
+  "ship_to_address": "1847 Maple Hollow Lane, Boise, ID 83702",
+  "carrier": "UPS",
+  "ship_method": "Ground",
+  "tracking_number": "1Z84E2R60391744820",
+  "total_packages": "2"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "sku",
+     "label": "SKU"
+    },
+    {
+     "key": "description",
+     "label": "Item"
+    },
+    {
+     "key": "quantity_shipped",
+     "label": "Qty"
+    }
+   ],
+   "rows": [
+    [
+     "JP-TNT-2P-GRN",
+     "Ridgeline 2-person tent, forest green",
+     "1"
+    ],
+    [
+     "JP-PAD-R25-L",
+     "Insulated sleeping pad R2.5, large",
+     "2"
+    ],
+    [
+     "JP-STV-CAN",
+     "Canister stove with igniter",
+     "1"
+    ],
+    [
+     "JP-HDL-350",
+     "Headlamp 350 lumen, rechargeable",
+     "2"
+    ],
+    [
+     "JP-SOK-MRN-M",
+     "Merino hiking socks, medium, 3 pair",
+     "4"
+    ]
+   ]
+  }
+ ]
+}

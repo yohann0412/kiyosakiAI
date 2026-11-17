@@ -1,0 +1,75 @@
+{
+ "id": "rc-03-restaurant-tip",
+ "docType": "receipt",
+ "capture": "photo",
+ "difficulty": "hard",
+ "about": "A restaurant check with a quantity column and a tip and total written in by hand. The handwritten total is the total.",
+ "files": [
+  "document.jpg"
+ ],
+ "fields": {
+  "merchant_name": "THE COPPER KETTLE",
+  "merchant_address": "58 Market Square, Portsmouth, NH 03801",
+  "merchant_phone": "(603) 555-0144",
+  "receipt_number": "40718",
+  "date": "2026-11-01",
+  "time": "19:55",
+  "payment_method": "AMEX",
+  "card_last4": "1009",
+  "subtotal": "128.00",
+  "tax_total": "10.88",
+  "tip": "24.00",
+  "total": "162.88"
+ },
+ "tables": [
+  {
+   "name": "main",
+   "columns": [
+    {
+     "key": "quantity",
+     "label": "QTY"
+    },
+    {
+     "key": "description",
+     "label": "ITEM"
+    },
+    {
+     "key": "amount",
+     "label": "AMOUNT"
+    }
+   ],
+   "rows": [
+    [
+     "2",
+     "Clam chowder cup",
+     "17.00"
+    ],
+    [
+     "1",
+     "Lobster roll",
+     "34.00"
+    ],
+    [
+     "1",
+     "Fish & chips",
+     "24.50"
+    ],
+    [
+     "1",
+     "Kettle burger med",
+     "19.00"
+    ],
+    [
+     "3",
+     "Draft lager",
+     "24.00"
+    ],
+    [
+     "1",
+     "Blueberry pie",
+     "9.50"
+    ]
+   ]
+  }
+ ]
+}

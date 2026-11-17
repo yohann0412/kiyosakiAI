@@ -68,15 +68,15 @@ export default function Home() {
     <>
       <SiteHeader page="home" />
       <main>
-        <section className="container-page pt-10 sm:pt-16">
-          <h1 className="max-w-3xl text-4xl font-semibold sm:text-6xl">Turn paperwork into a spreadsheet</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
+        <section className="container-page pt-7 sm:pt-16">
+          <h1 className="max-w-3xl text-[2rem] font-semibold leading-[1.1] sm:text-6xl">Turn paperwork into a spreadsheet</h1>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink-2 sm:mt-5 sm:text-lg">
             Upload a photo or PDF of an invoice, packing slip, bill of lading, purchase order, receipt or handwritten order. Get clean, editable
             rows back, with the arithmetic checked, and download them as Excel or CSV.
           </p>
         </section>
 
-        <section className="container-page mt-8">
+        <section className="container-page mt-5 sm:mt-8">
           <Tool page="home" docType="auto" />
         </section>
 

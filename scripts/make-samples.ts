@@ -15,7 +15,8 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { PROMPT_VERSION, extractDocument, extractorConfig } from "@/core/extractor";
+import { PROMPT_VERSION, extractDocument, extractorConfig, type ExtractionResult } from "@/core/extractor";
+import { remoteConfigured, remoteExtract } from "./remote";
 import { closeBrowser, renderDoc, renderPreview } from "./docgen/render";
 import { SAMPLES } from "./docgen/samples";
 import { validateDef } from "./docgen/templates";
@@ -28,9 +29,12 @@ const outDir = path.join(process.cwd(), "public", "samples");
 async function main() {
   fs.mkdirSync(outDir, { recursive: true });
   const config = extractorConfig();
-  const live = !renderOnly && config.ready && config.provider !== "mock";
+  const local = config.ready && config.provider !== "mock";
+  // No local key: use the deployed site's extractor if it is configured.
+  const remote = !local && remoteConfigured();
+  const live = !renderOnly && (local || remote);
   if (!renderOnly && !live) {
-    console.log("Extractor is not configured (or is the mock): rendering images only. Existing .json files are left alone.");
+    console.log("No extractor available (no model key here, no SITE_URL + ADMIN_TOKEN): rendering images only. Existing .json files are left alone.");
   }
 
   let cost = 0;
@@ -45,10 +49,10 @@ async function main() {
     console.log(`rendered ${def.id} (${def.capture}, ${Math.round(preview.length / 1024)} KB)`);
 
     if (!live) continue;
-    const result = await extractDocument({
-      inputs: files.map((file) => ({ data: new Uint8Array(file.data), mediaType: file.mediaType })),
-      hint: def.docType,
-    });
+    const inputs = files.map((file, i) => ({ data: new Uint8Array(file.data), mediaType: file.mediaType, name: `page-${i + 1}.${file.ext}` }));
+    const result = remote
+      ? await remoteExtract<ExtractionResult>(inputs, { docType: def.docType })
+      : await extractDocument({ inputs, hint: def.docType });
     cost += result.usage.costUsd;
     const { usage, ...publicResult } = result;
     fs.writeFileSync(

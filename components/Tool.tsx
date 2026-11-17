@@ -325,8 +325,12 @@ export function Tool({ page, docType = "auto", sample }: { page: string; docType
       {/* ---------------------------------------------------------------- idle */}
       {phase.name === "idle" || phase.name === "error" || phase.name === "choose" ? (
         <div className="p-4 sm:p-6">
-          <div className="mb-4 flex flex-wrap items-center gap-1.5" role="radiogroup" aria-label="Document type">
-            <span className="mr-1 text-sm font-medium text-muted">Document:</span>
+          <div
+            className="-mx-4 mb-4 flex items-center gap-1.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0"
+            role="radiogroup"
+            aria-label="Document type"
+          >
+            <span className="mr-1 shrink-0 text-sm font-medium text-muted">Document:</span>
             {(["auto", ...PICKER_TYPES] as DocTypeHint[]).map((id) => (
               <button
                 key={id}
@@ -334,7 +338,7 @@ export function Tool({ page, docType = "auto", sample }: { page: string; docType
                 role="radio"
                 aria-checked={hint === id}
                 onClick={() => setHint(id)}
-                className={`rounded-full border px-3 py-1 text-sm font-medium transition-colors ${
+                className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-sm font-medium transition-colors ${
                   hint === id ? "border-accent bg-accent-soft text-ink" : "border-line text-ink-2 hover:border-line-strong"
                 }`}
               >

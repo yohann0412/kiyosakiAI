@@ -6,6 +6,8 @@
  *   npm run eval -- --only inv-03-scan-noruling --verbose
  *   npm run eval -- --auto                do not tell the extractor the document type
  *   npm run eval -- --provider mock       exercises the harness without a model key
+ *   npm run eval -- --remote              run against the deployed site's extractor
+ *                                         (SITE_URL + ADMIN_TOKEN; the model key stays on the host)
  *
  * Run it before and after every change to the extractor and record both
  * numbers in results.tsv. A full run costs real money (the total is printed).
@@ -16,8 +18,9 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { ExtractorError, PROMPT_VERSION, extractDocument, extractorConfig, type ExtractOptions } from "@/core/extractor";
+import { ExtractorError, PROMPT_VERSION, extractDocument, extractorConfig, type ExtractOptions, type ExtractionResult } from "@/core/extractor";
 import { checkEvalSeal, loadGolden, mediaTypeOf, scoreDoc, type DocScore, type GoldenDoc } from "./eval-lib";
+import { remoteConfigured, remoteExtract } from "./remote";
 
 const args = process.argv.slice(2);
 const flag = (name: string) => args.includes(`--${name}`);
@@ -28,6 +31,8 @@ const overrides: Partial<ExtractOptions> = {
   ...(option("effort") ? { effort: option("effort") as ExtractOptions["effort"] } : {}),
   ...(option("provider") ? { provider: option("provider") } : {}),
 };
+// With no local model key but a configured site, measure the deployed extractor.
+const remote = flag("remote") || (!flag("local") && !option("provider") && !extractorConfig().ready && remoteConfigured());
 const only = option("only");
 const concurrency = Number(option("concurrency") ?? 3);
 const label = option("label") ?? "";
@@ -42,13 +47,17 @@ async function runOne(doc: GoldenDoc): Promise<Row> {
   const inputs = doc.files.map((file) => ({
     data: new Uint8Array(fs.readFileSync(path.join(doc.dir, file))),
     mediaType: mediaTypeOf(file),
+    name: file,
   }));
   const started = Date.now();
+  const hint = flag("auto") ? "auto" : doc.docType;
   try {
-    const result = await extractDocument({ inputs, hint: flag("auto") ? "auto" : doc.docType, ...overrides });
+    const result = remote
+      ? await remoteExtract<ExtractionResult>(inputs, { docType: hint, model: overrides.model, effort: overrides.effort })
+      : await extractDocument({ inputs, hint, ...overrides });
     return { ...scoreDoc(doc, result), ms: result.usage.ms, costUsd: result.usage.costUsd };
   } catch (error) {
-    const message = error instanceof ExtractorError ? `${error.code}: ${error.message}` : String(error);
+    const message = error instanceof ExtractorError ? `${error.code}: ${error.message}` : error instanceof Error ? error.message : String(error);
     const empty = scoreDoc(doc, {
       docType: "other",
       docTypeLabel: "",
@@ -75,8 +84,14 @@ async function main() {
   }
 
   const config = extractorConfig(overrides);
-  if (!config.ready) {
-    console.error("The extractor has no credentials (ANTHROPIC_API_KEY). Set one, or use --provider mock to test the harness.");
+  if (remote && !remoteConfigured()) {
+    console.error("--remote needs SITE_URL and ADMIN_TOKEN.");
+    process.exit(2);
+  }
+  if (!remote && !config.ready) {
+    console.error(
+      "The extractor has no credentials here. Set ANTHROPIC_API_KEY, or set SITE_URL and ADMIN_TOKEN to measure the deployed site, or use --provider mock to test the harness.",
+    );
     process.exit(2);
   }
 
@@ -85,7 +100,8 @@ async function main() {
     console.error("No golden documents found.");
     process.exit(2);
   }
-  console.log(`model ${config.model}  effort ${config.effort}  provider ${config.provider}  prompt ${PROMPT_VERSION}  docs ${docs.length}\n`);
+  const where = remote ? `remote ${process.env.SITE_URL}${overrides.model ? "" : " (the site's configured model)"}` : `provider ${config.provider}`;
+  console.log(`model ${remote && !overrides.model ? "site default" : config.model}  effort ${remote && !overrides.effort ? "site default" : config.effort}  ${where}  prompt ${PROMPT_VERSION}  docs ${docs.length}\n`);
 
   const rows: Row[] = new Array(docs.length);
   let next = 0;

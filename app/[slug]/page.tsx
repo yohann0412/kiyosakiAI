@@ -70,7 +70,7 @@ export default async function ToolPageRoute({ params }: { params: Promise<{ slug
     <>
       <SiteHeader page={page.slug} />
       <main>
-        <section className="container-page pt-8 sm:pt-12">
+        <section className="container-page pt-5 sm:pt-12">
           <nav aria-label="Breadcrumb" className="text-sm text-muted">
             <Link href="/" className="hover:text-ink hover:underline">
               All converters
@@ -78,11 +78,11 @@ export default async function ToolPageRoute({ params }: { params: Promise<{ slug
             <span className="mx-1.5">/</span>
             <span>{page.h1}</span>
           </nav>
-          <h1 className="mt-3 text-4xl font-semibold sm:text-5xl">{page.h1}</h1>
-          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink-2">{fill(page.intro)}</p>
+          <h1 className="mt-2 text-[2rem] font-semibold leading-[1.1] sm:mt-3 sm:text-5xl">{page.h1}</h1>
+          <p className="mt-3 max-w-3xl text-base leading-relaxed text-ink-2 sm:mt-4 sm:text-lg">{fill(page.intro)}</p>
         </section>
 
-        <section className="container-page mt-7">
+        <section className="container-page mt-5 sm:mt-7">
           <Tool page={page.slug} docType={page.docType} sample={hasSample && page.sample ? { ...page.sample, image: `/samples/${page.sample.id}.jpg` } : undefined} />
         </section>
 
